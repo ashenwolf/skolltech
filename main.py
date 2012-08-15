@@ -43,7 +43,7 @@ config = {
         },
     'webapp2_extras.jinja2' : {
         'environment_args': {
-#            'extensions': ['jinja2.ext.i18n', 'jinja2.ext.autoescape', 'jinja2.ext.with_'],
+            'extensions': ['jinja2.ext.i18n', 'jinja2.ext.autoescape', 'jinja2.ext.with_'],
             'undefined': NullUndefined,
             },
 #        'filters': {

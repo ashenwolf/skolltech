@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Skoll Technologies</title>
+
+	<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/static/bootstrap/css/bootstrap-responsive.css">
+	<link rel="stylesheet" type="text/css" href="/static/style.css">
+
+	<script type="text/javascript" src="/static/bootstrap/js/bootstrap.js"></script>
+</head>
+<body>
+	<div id="page-body" class="container">
+		<div id="page-header" class="row">
+			<div class="span3"><h1>Skoll Technologies</h1></div>
+			<div class="span9"><h3 style="text-align: right;">Home | Portfolio | Projects | Blog | Contacts</h3></div>
+		</div>
+
+		{% block content %}{% endblock %}
+
+		<div id="page-footer" class="row">
+			<div class="span12"><hr />
+				<p>&copy; 2012 Skoll Technologies. All rights reserved.</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
