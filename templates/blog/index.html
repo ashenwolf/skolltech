@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}{% trans %}Blog{% endtrans %} | {% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="span12">
+			<a href="/blog/add/" class="btn btn-large" style="float: right;"><i class="icon-plus"></i> New post</a>
+			<h1>{% trans %}Blog{% endtrans %}</h1><hr />
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="span9">
+			{% for post in posts %}
+			<div class="row">
+				<div class="span3">
+					<img src="http://placehold.it/320x240" alt="{{ post.title }}" />
+					<p>{{ post.date_created }}</p>
+				</div>
+				<div class="span6">
+					<h2><a href="{{ post.key().id() }}/">{{ post.title }}</a></h2>
+
+					<div>
+						{% if post.teaser %}{{ post.teaser }}
+						{% else %}{{ post.content }}{% endif %}
+					</div>
+				</div>
+			</div>
+			<hr />
+			{% endfor %}
+		</div>
+
+		<div class="span3">
+			<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+			<script>
+			new TWTR.Widget({
+			  version: 2,
+			  type: 'profile',
+			  rpp: 5,
+			  interval: 30000,
+			  width: 'auto',
+			  height: 400,
+			  theme: {
+			    shell: {
+			      background: '#dedede',
+			      color: '#000000'
+			    },
+			    tweets: {
+			      background: '#ffffff',
+			      color: '#000000',
+			      links: '#00a3de'
+			    }
+			  },
+			  features: {
+			    scrollbar: false,
+			    loop: false,
+			    live: true,
+			    behavior: 'all'
+			  }
+			}).render().setUser('ashenwolf').start();
+			</script>
+		</div>
+	</div>
+
+
+{% endblock %}

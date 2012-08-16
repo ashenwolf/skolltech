@@ -39,7 +39,7 @@ class NullUndefined(jinja2.Undefined):
 
 config = {
     'webapp2_extras.i18n': {
-        'translations_path': 'locale',
+        'translations_path': os.path.join(os.path.dirname(__file__), 'locale'),
         },
     'webapp2_extras.jinja2' : {
         'environment_args': {
@@ -61,15 +61,17 @@ config = {
 #template.register_template_library('templatetags.site_info')
 
 app = webapp2.WSGIApplication([
-    webapp2.Route(r'/', handler=views.home, name='home'),
-
     # blog
     routes.PathPrefixRoute('/blog', skollblog.routes),
+    #webapp2.Route(r'/blog/', handler=skollblog.views.BlogIndex, name='blog-index'),
 
     # portfolio
 
 
     # projects
+
+    # index page
+    webapp2.Route(r'/', handler=views.home, name='home'),
 
 ], debug=True, config=config)
 	

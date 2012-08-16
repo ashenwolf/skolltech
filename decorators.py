@@ -2,8 +2,11 @@ import os
 import webapp2
 
 from webapp2_extras import jinja2
+from webapp2_extras import i18n
 from google.appengine.api import users
 from google.appengine.api import memcache
+
+
 
 default_cache_timeout = 3 * 24 * 3600 # 1 day
 
@@ -38,6 +41,10 @@ def render_to(template_path, cache_timeout = default_cache_timeout):
 	def renderer(func):
 		def wrapper(self, *args, **kw):
 			output = func(self, *args, **kw)
+
+			#locale = self.request.GET.get('locale', 'en_US')
+			#i18n.get_i18n().set_locale(locale)
+
 			if isinstance(output, dict):
 				if cache_timeout > 0:
 					self.render_response_cache(self.request.path_qs, cache_timeout, template_path, **output)

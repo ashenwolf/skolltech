@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }} | {% trans %}Blog{% endtrans %} | {% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="span12">
+			<h1>{{ post.title }}</h1><hr />
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="span9">
+			<p>{{ post.date_created }}</p>
+
+			<div>
+				{{ post.content }}
+			</div>
+			
+			<hr />
+			<div class="row">
+				<div class="span7"><p>Tags: 
+					{% for tag in post.tags %}
+						<a href="#">{{ tag }}</a>, 
+					{% endfor %}</p>
+				</div>
+				<div class="span2">
+					<a href="edit/" class="btn pull-right">Edit</a>
+				</div>
+			</div>
+
+			<hr />
+			<!-- START: Livefyre Embed -->
+			<script type='text/javascript' src='http://zor.livefyre.com/wjs/v1.0/javascripts/livefyre_init.js'></script>
+			<script type='text/javascript'>
+			    var fyre = LF({
+			        site_id: 310016,
+			        article_id: "blogpost-{{ post.key().id() }}",
+			    });
+			</script>
+			<!-- END: Livefyre Embed -->
+		</div>
+
+		<div class="span3">
+			<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+			<script>
+			new TWTR.Widget({
+			  version: 2,
+			  type: 'profile',
+			  rpp: 5,
+			  interval: 30000,
+			  width: 'auto',
+			  height: 400,
+			  theme: {
+			    shell: {
+			      background: '#dedede',
+			      color: '#000000'
+			    },
+			    tweets: {
+			      background: '#ffffff',
+			      color: '#000000',
+			      links: '#00a3de'
+			    }
+			  },
+			  features: {
+			    scrollbar: false,
+			    loop: false,
+			    live: true,
+			    behavior: 'all'
+			  }
+			}).render().setUser('ashenwolf').start();
+			</script>			
+		</div>
+	</div>
+
+{% endblock %}
