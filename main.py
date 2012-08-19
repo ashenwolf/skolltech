@@ -31,6 +31,7 @@ import misc.filters
 import skolladmin
 import skollblog
 import skollfolio
+import skollimages
 
 class NullUndefined(jinja2.Undefined):
     def __int__(self):
@@ -71,10 +72,13 @@ app = webapp2.WSGIApplication([
     # projects
     #routes.PathPrefixRoute('/projects', skollprojects.routes),
 
+
     # admin routes
     routes.PathPrefixRoute('/manage', skolladmin.routes),
     routes.PathPrefixRoute('/manage', skollblog.adminRoutes),
 
+    # image management
+    routes.PathPrefixRoute('/manage', skollimages.adminRoutes),
 
     # index page
     webapp2.Route(r'/', handler=views.home, name='home'),

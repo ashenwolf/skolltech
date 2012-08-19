@@ -1,8 +1,14 @@
 #
 from google.appengine.ext import db
+from google.appengine.ext import blobstore
+
 from misc.decorators import render_to, admin_required, login_required, BaseHandler 
 from models import BlogPost
+from skollimages.models import ImageRecord
 from forms import BlogPostForm
+
+import webapp2
+import json
 
 class posts(BaseHandler):
     @login_required
@@ -65,6 +71,8 @@ class edit(BaseHandler):
             "admin_section": "admin-blog-posts",
             "form": form,
             "success": extra=="saved",
+            "upload_url": blobstore.create_upload_url(webapp2.uri_for('image-upload')),
+            "post": post,
         }
 
     @login_required
@@ -72,6 +80,7 @@ class edit(BaseHandler):
     def post(self, post_id, extra=""):
         post = BlogPost.get_by_id(long(post_id))
         form = BlogPostForm(self.request.POST)
+        success = False
 
         if form.validate():
             form.populate_obj(post)
@@ -81,9 +90,15 @@ class edit(BaseHandler):
         return {
             "admin_section": "admin-blog-posts",
             "form": form,
-            "success": success or None
+            "success": success,
+            "post": post,
         }
 
-class remove(BaseHandler):
-    pass
-
+class delete(BaseHandler):
+    def post(self):
+        post = BlogPost.get_by_id(long(self.request.params.get("post_id", None)))
+        for blob in post.imagerecord_set: blob.image.delete()
+        db.delete(post.imagerecord_set)
+        post.delete()
+        self.response.headers['Content-Type'] = 'application/json'
+        self.response.out.write(json.dumps({"result": "ok"}))

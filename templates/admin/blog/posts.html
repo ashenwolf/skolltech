@@ -17,10 +17,10 @@
   </thead>
   <tbody>
     {% for post in posts %}
-    <tr>
+    <tr id="post-{{ post.key().id() }}">
       <td>
       	<a href="{{ url('admin-blog-post-edit', post_id=post.key().id()) }}"><i class="icon-edit"></i></a>
-      	<a href="{{ url('admin-blog-post-remove', post_id=post.key().id()) }}"><i class="icon-trash"></i></a>
+      	<a href="#" onClick="removePost({{ post.key().id() }})"><i class="icon-trash"></i></a>
       </td>
       <td>{{ post.title }}</td>
       <td>{% if post.author %}{{ post.author }}{% endif %}</td>
@@ -36,5 +36,23 @@
     <a href="{{ url('admin-blog-post-add') }}" class="btn btn-primary"><i class="icon-plus icon-white"></i> New post</a>
 
 </div>
+{% endblock %}
 
+{% block javascript %}
+<script type="text/javascript">
+function removePost(id) {
+  jQuery.ajax({
+    url: "{{ url('admin-blog-post-delete') }}",
+    data: {
+      post_id: id,
+    },
+    type: "POST",
+    dataType: "json",
+    success: function(data) {
+      if (data.result == "ok")
+          $('#post-' + id).remove();
+    }
+  });
+}
+</script>
 {% endblock %}
