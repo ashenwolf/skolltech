@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}{% trans %}Manage site{% endtrans %} | {% endblock %}
+
+
+{% block content %}
+	<div class="row">
+		<div class="span12">
+			<h1>{% trans %}Manage site{% endtrans %}</h1><hr />
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="span3">
+			<div class="well" style="padding: 8px 0;">
+				<ul class="nav nav-list">
+				  <li class="nav-header">
+				    General setup
+				  </li>
+				  <li class="{% if admin_section == "admin-dashboard" %}active{% endif %}">
+				    <a href="{{ url('admin-dashboard') }}">{% trans %}Site settings{% endtrans %}</a>
+				    <a href="#">About us</a>
+				    <a href="#">Contacts</a>
+				  </li>
+
+				  <li class="divider"></li>
+				  
+				  <li class="nav-header">
+				    Blog
+				  </li>
+				  <li class="{% if admin_section == "admin-blog-posts-new" %}active{% endif %}">
+				    <a href="{{ url('admin-blog-post-add') }}">New post</a>
+				  </li>
+				  <li class="{% if admin_section == "admin-blog-posts" %}active{% endif %}">
+				    <a href="{{ url('admin-blog-posts') }}">Posts</a>
+				  </li>
+				  <li class="{% if admin_section == "admin-blog-categories" %}active{% endif %}">
+				    <a href="{{ url('admin-blog-categories') }}">Categories</a>
+				  </li>
+
+				  <li class="divider"></li>
+				  
+				  <li class="nav-header">
+				    Projects
+				  </li>
+				  <li>
+				    <a href="#">New project</a>
+				    <a href="#">Own projects</a>
+				  </li>
+
+				  <li class="divider"></li>
+				  
+				  <li class="nav-header">
+				    Portfolio
+				  </li>
+				  <li>
+				    <a href="#">New portfolio project</a>
+				    <a href="#">Portfolio projects</a>
+				    <a href="#">Featured portfolio projects</a>
+				  </li>
+
+				  <li class="divider"></li>
+				  
+				  <li class="nav-header">
+				    Profile
+				  </li>
+				  <li>
+				    <a href="{{ url('user-logout') }}">Logout</a>
+				  </li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="span9">
+			{% block adminarea %}
+			{% endblock %}
+		</div>
+	</div>
+
+{% endblock %}

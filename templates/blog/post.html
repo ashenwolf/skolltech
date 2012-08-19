@@ -1,34 +1,44 @@
 {% extends 'base.html' %}
 
-{% block title %}{% trans %}Blog{% endtrans %} | {% endblock %}
+{% block title %}{{ post.title }} | {% trans %}Blog{% endtrans %} | {% endblock %}
 
 {% block content %}
 	<div class="row">
 		<div class="span12">
-			<a href="{{ url('admin-blog-post-add') }}" class="btn btn-large" style="float: right;"><i class="icon-plus"></i> New post</a>
-			<h1>{% trans %}Blog{% endtrans %}</h1><hr />
+			<h1>{{ post.title }}</h1><hr />
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="span9">
-			{% for post in posts %}
-			<div class="row">
-				<div class="span3">
-					<img src="http://placehold.it/320x240" alt="{{ post.title }}" />
-					<p>{{ post.date_created }}</p>
-				</div>
-				<div class="span6">
-					<h2><a href="{{ post.key().id() }}/">{{ post.title }}</a></h2>
+			<p>{{ post.date_created }}</p>
 
-					<div>
-						{% if post.teaser %}{{ post.teaser }}
-						{% else %}{{ post.content }}{% endif %}
-					</div>
+			<div>
+				{{ post.content }}
+			</div>
+			
+			<hr />
+			<div class="row">
+				<div class="span7"><p>Tags: 
+					{% for tag in post.tags %}
+						<a href="#">{{ tag }}</a>, 
+					{% endfor %}</p>
+				</div>
+				<div class="span2">
+					<a href="{{ url('admin-blog-post-edit', post_id = post.key().id()) }}" class="btn pull-right">Edit</a>
 				</div>
 			</div>
+
 			<hr />
-			{% endfor %}
+			<!-- START: Livefyre Embed -->
+			<script type='text/javascript' src='http://zor.livefyre.com/wjs/v1.0/javascripts/livefyre_init.js'></script>
+			<script type='text/javascript'>
+			    var fyre = LF({
+			        site_id: 310016,
+			        article_id: "blogpost-{{ post.key().id() }}",
+			    });
+			</script>
+			<!-- END: Livefyre Embed -->
 		</div>
 
 		<div class="span3">
@@ -59,9 +69,8 @@
 			    behavior: 'all'
 			  }
 			}).render().setUser('ashenwolf').start();
-			</script>
+			</script>			
 		</div>
 	</div>
-
 
 {% endblock %}

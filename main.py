@@ -19,15 +19,18 @@
 import os
 import webapp2
 import jinja2
-import webapp2_extras.jinja2
+#import webapp2_extras.jinja2
 from webapp2_extras import routes
-from google.appengine.api import users
+#from google.appengine.api import users
 from google.appengine.ext.webapp.util import run_wsgi_app
 
 # importing apps
 import views
+import misc.filters
 
+import skolladmin
 import skollblog
+import skollfolio
 
 class NullUndefined(jinja2.Undefined):
     def __int__(self):
@@ -46,14 +49,12 @@ config = {
             'extensions': ['jinja2.ext.i18n', 'jinja2.ext.autoescape', 'jinja2.ext.with_'],
             'undefined': NullUndefined,
             },
-#        'filters': {
-#            'serve_image': shop.filters.serve_image,
-#            'project_category': shop.filters.project_category,
-#            },
-#	 'globals': {
-#	     'product_category_root': shop.filters.product_category_root,
-#            'get_featured_products': shop.filters.get_featured_products,
-#	     },
+        'filters': {
+            'serve_image': misc.filters.serve_image,
+            },
+	    'globals': {
+            'url': webapp2.uri_for,
+	        },
         },
     'template_path': os.path.join(os.path.dirname(__file__), 'templates/'),
     }   
@@ -63,15 +64,22 @@ config = {
 app = webapp2.WSGIApplication([
     # blog
     routes.PathPrefixRoute('/blog', skollblog.routes),
-    #webapp2.Route(r'/blog/', handler=skollblog.views.BlogIndex, name='blog-index'),
 
     # portfolio
-
+    #routes.PathPrefixRoute('/portfolio', skollfolio.routes),
 
     # projects
+    #routes.PathPrefixRoute('/projects', skollprojects.routes),
+
+    # admin routes
+    routes.PathPrefixRoute('/manage', skolladmin.routes),
+    routes.PathPrefixRoute('/manage', skollblog.adminRoutes),
+
 
     # index page
     webapp2.Route(r'/', handler=views.home, name='home'),
+    webapp2.Route(r'/error/<error_id:\w+>', handler=views.error, name='error'),
+
 
 ], debug=True, config=config)
 	

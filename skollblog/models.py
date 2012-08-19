@@ -7,7 +7,7 @@ from google.appengine.ext import blobstore
 class BlogCategory(db.Model):
     title = db.StringProperty(required=True)
     slug = db.StringProperty(required=True)
-
+    order = db.IntegerProperty(required=True, default=1)
 
 class BlogPost(db.Model):
     title = db.StringProperty(required=True)
@@ -24,6 +24,6 @@ class BlogPost(db.Model):
     #date_published = db.DateTimeProperty()
     is_published = db.BooleanProperty(required=True, default=True)
 
-    author = db.UserProperty(auto_current_user_add=True) #required=True, 
+    author = db.UserProperty(required=True, auto_current_user_add=True) 
 
     #role = db.StringProperty(required=True, choices=set(["executive", "manager", "producer"]))
