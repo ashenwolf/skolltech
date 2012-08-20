@@ -151,7 +151,7 @@ jQuery(document).ready(function () {
         },
         done: function (e, data) {
             $('<li class="span2" id="image-'+ data.result.image_id +'"></li>').append(
-            	$('<a class="thumbnail"></a>').append(
+            	$('<a class="thumbnail" onClick="setTeaser('+ data.result.image_id +')"></a>').append(
             		$('<a class="close" onClick="removeImage('+ data.result.image_id +');" style="margin-right: 2px;">&times;</a>')
             		).append(
             		$('<img alt="" />').attr("src", data.result.image_url)
