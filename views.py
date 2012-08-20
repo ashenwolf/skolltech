@@ -1,9 +1,12 @@
 from misc.decorators import render_to, BaseHandler 
+from skollfolio.models import PortfolioProject
 
 class home(BaseHandler):
     @render_to("index.html", 0)
     def get(self):
+        projects = PortfolioProject.all().fetch(None)
         return {
+            "projects": projects,
         }
 
 

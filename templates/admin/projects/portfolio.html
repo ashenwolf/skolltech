@@ -1,0 +1,56 @@
+{% extends 'admin/base.html' %}
+
+{% block adminarea %}
+<h2>{% trans %}Manage portfolio projects{% endtrans %}</h2>
+<hr />
+
+<table class="table table-stripped table-condensed">
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Title</th>
+      <th>Teaser</th>
+      <th>Category</th>
+      <th>Published</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for project in projects %}
+    <tr id="project-{{ project.key().id() }}">
+      <td>
+      	<a href="{{ url('admin-projects-edit', project_id=project.key().id()) }}"><i class="icon-edit"></i></a>
+      	<a href="#" onClick="removeProject({{ project.key().id() }})"><i class="icon-trash"></i></a>
+      </td>
+      <td>{{ project.title }}</td>
+      <td>{{ project.teaser }}</td>
+      <td>&nbsp;</td>
+      <td>{{ project.is_published }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="form-actions">
+    <a href="{{ url('admin-projects-add') }}" class="btn btn-primary"><i class="icon-plus icon-white"></i> New project</a>
+
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+function removeProject(id) {
+  jQuery.ajax({
+    url: "{{ url('admin-projects-delete') }}",
+    data: {
+      project_id: id,
+    },
+    type: "POST",
+    dataType: "json",
+    success: function(data) {
+      if (data.result == "ok")
+          $('#project-' + id).remove();
+    }
+  });
+}
+</script>
+{% endblock %}

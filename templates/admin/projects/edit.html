@@ -1,16 +1,16 @@
 {% extends 'admin/base.html' %}
 
-{% block title %}{% trans %}Blog{% endtrans %} | {% endblock %}
+{% block title %}{% trans %}Projects{% endtrans %} | {% endblock %}
 
 {% block css %}
 	<link rel="stylesheet" type="text/css" href="/static/css/jquery.fileupload-ui.css">
 {% endblock %}
 
 {% block adminarea %}
-	{% if post %}
-	<h1>{% trans %}Edit: {% endtrans %} {{ post }}</h1>
+	{% if project %}
+	<h1>{% trans %}Edit: {% endtrans %} {{ project }}</h1>
 	{% else %}
-	<h1>{% trans %}Write new blog post{% endtrans %}</h1>
+	<h1>{% trans %}New project{% endtrans %}</h1>
 	{% endif %}
 	<hr />
 
@@ -28,7 +28,7 @@
 	{% if success %}
 	    <div class="alert-success alert">
 	    	<a class="close" data-dismiss="alert" href="#">×</a>
-	    	<h4 class="alert-heading">Post saved!</h4>
+	    	<h4 class="alert-heading">Project saved!</h4>
 	    </div>
 	{% endif %}
 
@@ -55,10 +55,43 @@
 					<p class="help-block">No HTML allowed. Plain text only.</p>
 				</div>
 			</div>
-			<div class="control-group {% if form.content.errors %}error{% endif %}">
-				{{ form.content.label(class="control-label") }}
+
+			<div class="control-group {% if form.is_featured.errors %}error{% endif %}">
+				{{ form.is_featured.label(class="control-label") }}
 				<div class="controls">
-					{{ form.content(class="input-xlarge span7") }}
+					{{ form.is_featured }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.problem.errors %}error{% endif %}">
+				{{ form.problem.label(class="control-label") }}
+				<div class="controls">
+					{{ form.problem(class="input-xlarge span7") }}
+				</div>
+			</div>
+			<div class="control-group {% if form.solution.errors %}error{% endif %}">
+				{{ form.solution.label(class="control-label") }}
+				<div class="controls">
+					{{ form.solution(class="input-xlarge span7") }}
+				</div>
+			</div>
+			<div class="control-group {% if form.customer.errors %}error{% endif %}">
+				{{ form.customer.label(class="control-label") }}
+				<div class="controls">
+					{{ form.customer(class="input-xlarge span7") }}
+				</div>
+			</div>
+			<div class="control-group {% if form.url.errors %}error{% endif %}">
+				{{ form.url.label(class="control-label") }}
+				<div class="controls">
+					{{ form.url(class="input-xlarge span7") }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.description.errors %}error{% endif %}">
+				{{ form.description.label(class="control-label") }}
+				<div class="controls">
+					{{ form.description(class="input-xlarge span7") }}
 				</div>
 			</div>
 			<br />
@@ -69,16 +102,16 @@
 					<p class="help-block">Comma-separated list of tags. Case insensitive.</p>
 				</div>
 			</div>
-			{% if post %}
+			{% if project %}
 			<div class="control-group">
 				<label class="control-label">Attached<br />images</label>
 				<div class="controls">
 					<ul class="thumbnails" id="image_list">
-					{% for image in post.imagerecord_set %}
+					{% for image in project.imagerecord_set %}
 					  <li class="span2" id="image-{{ image.key().id() }}">
 						<a class="close" onClick="removeImage({{ image.key().id() }});" style="margin-right: 2px;">&times;</a>
-						<a class="thumbnail">
-							<img src="{{ image.image.key() | serve_image(240, False) }}" alt="{{ post.title }}. {{ image.title }}" />
+						<a class="thumbnail" onClick="setTeaser({{ image.key().id() }})">
+							<img src="{{ image.image.key() | serve_image(240, False) }}" alt="{{ project.title }}. {{ image.title }}" />
 						</a>
 					  </li>
 					{% endfor %}
@@ -87,17 +120,24 @@
 					<input class="btn" id="fileupload" type="file" name="file" multiple />
 				</div>
 			</div>
+
+			<div class="control-group">
+				<label class="control-label">Teaser:</label>
+				<div class="controls">
+					<img src="{{ project.teaser_image() | serve_image(800, False) }}" width="800px" height="200px" id="img-teaser" />
+				</div>
+			</div>
 			{% endif %}
 		</fieldset>
 	</form>
 
 	<div class="form-actions">
-		<a href="#" onclick="document.forms[0].submit();return false;" class="btn btn-primary"><i class="icon-ok-sign icon-white"></i> {% trans %}Save post{% endtrans %}</a>
+		<a onclick="document.forms[0].submit();return false;" class="btn btn-primary"><i class="icon-ok-sign icon-white"></i> {% trans %}Save project{% endtrans %}</a>
 	</div>
 {% endblock %}
 
 {% block javascript %}
-{% if post %}
+{% if project %}
 <script src="/static/js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
 <script src="/static/js/jquery.iframe-transport.js" type="text/javascript"></script>
 <script src="/static/js/jquery.fileupload.js" type="text/javascript"></script>
@@ -107,7 +147,7 @@ jQuery(document).ready(function () {
     $('#fileupload').fileupload({
         dataType: 'json',
         formData: {
-        	owner: "BlogPost:" + {{ post.key().id() }},
+        	owner: "PortfolioProject:" + {{ project.key().id() }},
         },
         done: function (e, data) {
             $('<li class="span2" id="image-'+ data.result.image_id +'"></li>').append(
@@ -128,6 +168,23 @@ jQuery(document).ready(function () {
 	    } 
     });
 });
+
+function setTeaser(id) {
+	jQuery.ajax({
+		url: "{{ url('admin-projects-set-teaser') }}",
+		data: {
+			project_id: {{ project.key().id() }},
+			teaser_id: id,
+		},
+		type: "POST",
+		dataType: "json",
+		success: function(data) {
+			if (data.teaser)
+		  		$('#img-teaser').attr("src", data.teaser);
+		}
+	});
+}
+
 
 function removeImage(id) {
 	jQuery.ajax({
@@ -151,7 +208,7 @@ function removeImage(id) {
 	//jQuery(document).noConflict();
 
 	jQuery(document).ready(function($) {
-		CKEDITOR.replace('content', {
+		CKEDITOR.replace('description', {
 			//toolbar: 'Basic',
 			toolbar: [
 					{ name: 'styles', 		items : [ 'Format' ] },

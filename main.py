@@ -52,6 +52,7 @@ config = {
             },
         'filters': {
             'serve_image': misc.filters.serve_image,
+            'upload_url': misc.filters.upload_url,
             },
 	    'globals': {
             'url': webapp2.uri_for,
@@ -76,6 +77,7 @@ app = webapp2.WSGIApplication([
     # admin routes
     routes.PathPrefixRoute('/manage', skolladmin.routes),
     routes.PathPrefixRoute('/manage', skollblog.adminRoutes),
+    routes.PathPrefixRoute('/manage', skollfolio.adminRoutes),
 
     # image management
     routes.PathPrefixRoute('/manage', skollimages.adminRoutes),

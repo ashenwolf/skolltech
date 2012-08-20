@@ -1,10 +1,47 @@
 {% extends 'base.html' %}
 
+{% block javascript %}
+
+	<script type="text/javascript" src="/static/js/jquery.easing-1.3.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.iosslider.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/* some custom settings */
+			$('.iosSlider').iosSlider({
+				desktopClickDrag: true,
+				snapToChildren: true,
+//				navSlideSelector: '.sliderContainer .slideSelectors .item',
+//				onSlideComplete: slideComplete,
+//				onSliderLoaded: sliderLoaded,
+//				onSlideChange: slideChange,
+				autoSlide: true,
+//				scrollbar: true,
+//				scrollbarContainer: '.sliderContainer .scrollbarContainer',
+//				scrollbarMargin: '0',
+//				scrollbarBorderRadius: '0'
+			});
+
+		});
+	</script>
+
+{% endblock %}
+
 {% block content %}
 
 	<div class="row">
 		<div class="span10 offset1">
-			<img src="http://placehold.it/1200x400" alt="The carousel will be here" />
+			<!-- slider container -->
+			<div class='iosSlider'>
+				<!-- slider -->
+				<div class='slider'>
+					<!-- slides -->
+					{% for project in projects %}
+					<div class='slide' style="position: relative;"><img src="{{ project.teaser_image()|serve_image(800, False) }}" style="width: 1200px; height: 400px; position: absolute; top: 0; left: 0; bottom: 0; right: 0;" /></div>
+					{% endfor %}
+				</div>
+
+			</div>
 		</div>
 	</div>
 
