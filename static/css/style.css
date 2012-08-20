@@ -25,22 +25,92 @@ body {
 	left: 0;
 	overflow: hidden;
 	
-	width: 12000px;
-	height: 400px;
+	width: 100%;
+/*	height: 100%;*/
 }
 
 /* slider */
 .iosSlider .slider {
 	/* required */
 	width: 100%;
-	height: 100%;
+/*	height: 100%;*/
+	z-index: 0;
 }
 
 /* slide */
-.iosSlider .slider .slide {
+.iosSlider .slider .item {
 	/* required */
 	float: left;
 
+	width: 100%;
+/*	height: 100%;*/
+	position: relative;
+}
+
+.iosSlider .slider .item .selectorShadow {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	background: url(/static/images/selector-shadow.png) no-repeat 0 0;
+	width: 120px;
+	height: 30px;
+}
+
+.iosSlider .slider .item .text1 {
+	background: none repeat scroll 0 0 #000000;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    position: absolute;
+    right: 150px;
+    top: 30px;
+    padding: 5px 2px 0 7px;
+}
+
+.iosSlider .slider .item .text1 span {
+	color: #FFFFFF;
+    font: 3.1em/1.5em Arial; /* Norican;*/
+    padding: 0 8px;
+}
+
+.iosSlider .slider .item .text2 {
+	background: none repeat scroll 0 0 #000000;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    padding: 5px 7px 7px;
+    position: absolute;
+    right: 0;
+    top: 100px;
+    max-width: 400px;
+}
+
+.iosSlider .slider .item .text2 span {
+	color: #FFFFFF;
+    font: 16px/20px "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.sliderContainer .slideSelectors {
+	position: relative;
+	bottom: 20px;
+	left: 0;
 	width: 1200px;
-	height: 400px;
+	margin: 0 auto;
+	z-index: 1;
+	height: 10px;
+}
+
+.sliderContainer .slideSelectors .item {
+	float: left;
+	width: 9px;
+	height: 9px;
+	border: 1px solid #000;
+	background: #999;
+	margin: 0 0 0 10px;
+	opacity: 0.25;
+	filter: alpha(opacity=25);
+}
+
+.sliderContainer .slideSelectors .selected {
+	background: #000;
+	opacity: 1;
+	filter: alpha(opacity=100);
 }

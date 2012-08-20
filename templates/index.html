@@ -12,9 +12,9 @@
 				desktopClickDrag: true,
 				snapToChildren: true,
 //				navSlideSelector: '.sliderContainer .slideSelectors .item',
-//				onSlideComplete: slideComplete,
-//				onSliderLoaded: sliderLoaded,
-//				onSlideChange: slideChange,
+				onSlideComplete: slideComplete,
+				onSliderLoaded: sliderLoaded,
+				onSlideChange: slideChange,
 				autoSlide: true,
 //				scrollbar: true,
 //				scrollbarContainer: '.sliderContainer .scrollbarContainer',
@@ -23,6 +23,39 @@
 			});
 
 		});
+
+		function slideChange(args) {
+		
+			$('.sliderContainer .slideSelectors .item').removeClass('selected');
+			$('.sliderContainer .slideSelectors .item:eq(' + args.currentSlideNumber + ')').addClass('selected');
+			try {
+				console.log(args);
+			} catch(err) {
+			}
+			
+		}
+		
+		function slideComplete(args) {
+				
+			$(args.sliderObject).find('.text1, .text2').attr('style', '');
+			
+			$(args.currentSlideObject).find('.text1').animate({
+				right: '100px',
+				opacity: '0.8'
+			}, 400, 'easeOutQuint');
+			
+			$(args.currentSlideObject).find('.text2').delay(200).animate({
+				right: '50px',
+				opacity: '0.8'
+			}, 400, 'easeOutQuint');
+			
+		}
+		
+		function sliderLoaded(args) {
+			slideComplete(args);
+			slideChange(args);
+		}
+
 	</script>
 
 {% endblock %}
@@ -30,17 +63,28 @@
 {% block content %}
 
 	<div class="row">
-		<div class="span10 offset1">
+		<div class="span10 offset1 sliderContainer">
 			<!-- slider container -->
 			<div class='iosSlider'>
 				<!-- slider -->
 				<div class='slider'>
 					<!-- slides -->
 					{% for project in projects %}
-					<div class='slide' style="position: relative;"><img src="{{ project.teaser_image()|serve_image(800, False) }}" style="width: 1200px; height: 400px; position: absolute; top: 0; left: 0; bottom: 0; right: 0;" /></div>
+					<div class='item'>
+						<div class = 'selectorShadow'></div>
+						<div class = 'text1'><span>{{ project.title }}</span></div>
+						<div class = 'text2'><span>{{ project.teaser }}</span></div>
+						<div style="height: 400px;">
+							<img src="{{ project.teaser_image()|serve_image(800, False) }}" style="width: 100%;" />
+						</div>
+					</div>
 					{% endfor %}
 				</div>
-
+			</div>
+			<div class = 'slideSelectors'>
+				{% for project in projects %}
+					<div class = 'item'></div>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
