@@ -178,7 +178,7 @@ body {
 	
 }
 
-.thumb-front {
+.thumb-front, .thumb-project {
 	background: #fff;
 	min-height: 300px;
 	color: #222;
@@ -186,7 +186,15 @@ body {
 	padding: 10px;
 }
 
-.thumb-front:hover {
+.thumb-front {
+	min-height: 300px;
+}
+
+.thumb-project {
+	min-height: 400px;
+}
+
+.thumb-front:hover, .thumb-project:hover {
 	text-decoration: none;
 	color: #000;
 }

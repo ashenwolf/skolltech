@@ -10,19 +10,28 @@
 
 			<div class="navbar">
 			  <div class="navbar-inner">
-			    <a class="brand" href="#">Projects:</a>
-			    <ul class="nav">
-				  <li class="active"><a href="#">All</a></li>
-				  <li><a href="#">Mobile applications</a></li>
-				  <li><a href="#">PC applications</a></li>
-				  <li><a href="#">Mac applications</a></li>
-				  <li><a href="#">Websites</a></li>
-				  <li><a href="#">Other</a></li>
-			    </ul>
+			  	<div class="container">
+				    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				    </a>
+
+				    <a class="brand" href="#">Projects:</a>
+
+				    <div class="nav-collapse">
+					    <ul class="nav">
+						  <li class="active"><a href="#">All</a></li>
+						  <li><a href="#">Mobile applications</a></li>
+						  <li><a href="#">PC applications</a></li>
+						  <li><a href="#">Mac applications</a></li>
+						  <li><a href="#">Websites</a></li>
+						  <li><a href="#">Other</a></li>
+					    </ul>
+					</div>
+			    </div>
 			  </div>
 			</div>
-			<ul class="nav nav-pills">
-			</ul>
 		</div>
 	</div>
 
@@ -30,9 +39,9 @@
 		<div class="span12">
 			<ul class="thumbnails">
 			  	{% for project in projects %}
-				  <li class="span3">
-				    <a herf="#" class="thumbnail thumb-front" style="position: relative;">
-				      <div style="background: url('{{ project.teaser_image()|serve_image(320, False) }}') no-repeat center left; background-size: 100%; width:100%; height: 120px;"></div><br>
+				  <li class="span4">
+				    <a herf="#" class="thumbnail thumb-project" style="position: relative;">
+				      <div style="background: url('{{ project.teaser_image()|serve_image(400, False) }}') no-repeat center left; background-size: 100%; width:100%; height: 180px;"></div><br>
 				      <h4>{{ project.title }}</h4>
 				      <p style="line-height: 1.5em;">{{ project.teaser }}</p>
 				      <p style="color: #08c; text-decoration: underline; position: absolute; bottom: 5px;">Learn more &raquo;</p>
