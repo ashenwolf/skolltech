@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}{% trans %}Portfolio{% endtrans %} - {% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="span12">
+			{% if is_admin %}<a href="{{ url('admin-projects-add') }}" class="btn btn-large" style="float: right;"><i class="icon-plus"></i> New project</a>{% endif %}
+			<h1>{% trans %}Our portfolio{% endtrans %}</h1>
+
+			<div class="navbar">
+			  <div class="navbar-inner">
+			    <a class="brand" href="#">Projects:</a>
+			    <ul class="nav">
+				  <li class="active"><a href="#">All</a></li>
+				  <li><a href="#">Mobile applications</a></li>
+				  <li><a href="#">PC applications</a></li>
+				  <li><a href="#">Mac applications</a></li>
+				  <li><a href="#">Websites</a></li>
+				  <li><a href="#">Other</a></li>
+			    </ul>
+			  </div>
+			</div>
+			<ul class="nav nav-pills">
+			</ul>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="span12">
+			<ul class="thumbnails">
+			  	{% for project in projects %}
+				  <li class="span3">
+				    <a herf="#" class="thumbnail thumb-front" style="position: relative;">
+				      <div style="background: url('{{ project.teaser_image()|serve_image(320, False) }}') no-repeat center left; background-size: 100%; width:100%; height: 120px;"></div><br>
+				      <h4>{{ project.title }}</h4>
+				      <p style="line-height: 1.5em;">{{ project.teaser }}</p>
+				      <p style="color: #08c; text-decoration: underline; position: absolute; bottom: 5px;">Learn more &raquo;</p>
+				    </a>
+				  </li>
+			  	{% endfor %}
+			</ul>
+		</div>
+	</div>
+
+
+{% endblock %}

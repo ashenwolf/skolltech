@@ -23,7 +23,7 @@
 			<div class="span8"><p style="text-align: right; padding-top: 10px;">
 				<a href="/" class="btn btn-large {% if section %}noback{% endif %}">Hello!</a> &nbsp;
 				<a href="/about/" class="btn btn-large {% if section != "portfolio" %}noback{% endif %}">About Us</a> &nbsp;
-				<a href="/portfolio/" class="btn btn-large {% if section != "portfolio" %}noback{% endif %}">Our Portfolio</a> &nbsp;
+				<a href="{{ url('portfolio-index') }}" class="btn btn-large {% if section != "portfolio" %}noback{% endif %}">Our Portfolio</a> &nbsp;
 				<!--<a href="/projects/" class="btn btn-large {% if section != "projects" %}noback{% endif %}">Our Projects</a> &nbsp;-->
 				<a href="{{ url('blog-index') }}" class="btn btn-large {% if section != "blog" %}noback{% endif %}">Scrapbook</a> &nbsp;
 				<a href="/contact/" class="btn btn-large {% if section != "contacts" %}noback{% endif %}">Contact Us</a> &nbsp;
@@ -37,9 +37,10 @@
 
 {% block content %}{% endblock %}
 
-		<div id="page-footer" class="row">
-			<div class="span12"><!--<hr />-->
-				<p>&copy; 2012 Skoll Technologies. All rights reserved.</p>
+		<div id="page-footer" class="row" style="position: relative; margin-top: 20px;">
+			<div class="fabricBackground"></div>
+			<div class="span12"><!--<hr />--><br>
+				<p style="color: #aaa;">&copy; 2012 Skoll Technologies. All rights reserved.</p>
 			</div>
 		</div>
 	</div>

@@ -1,6 +1,6 @@
 body {
 	font-size: 14px;
-	background: url(/static/images/bg_texture.jpg);
+	/*background: url(/static/images/bg_texture.jpg);*/
 	background: url(/static/images/container-bg-n.jpg);
 }
 
@@ -19,15 +19,16 @@ body {
 	min-height: 0 !important;
 }
 
-#sliderBackground {
-	-moz-box-shadow: inset 0px 0px 3px 5px #222;
-	-webkit-box-shadow: inset 0px 0px 3px 5px #222;
-	box-shadow: inset 0px 0px 3px 5px #222;
+.fabricBackground {
+	-moz-box-shadow: inset 0px 0px 3px 2px #222;
+	-webkit-box-shadow: inset 0px 0px 3px 2px #222;
+	box-shadow: inset 0px 0px 3px 2px #222;
 	position: absolute; 
 	top: 0px; 
 	bottom: 0; 
 	left: -1000px; 
 	right: -1000px; 
+	z-index: -1;
 	background: url(/static/images/container-bg.jpg);
 }
 

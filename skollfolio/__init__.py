@@ -5,8 +5,8 @@ import views
 import views_admin
 
 routes = [
-#    Route('/', 							views.index,		'portfolio-index'),
-#    Route('/<article_id:\d+>/', 		views.project, 		'portfolio-project'),
+    Route('/', 							views.index,		'portfolio-index'),
+    Route('/<project_id:\d+>/', 		views.project, 		'portfolio-project'),
 #    Route('/add/', 						views.add,			'portfolio-article-add'),
 #    Route('/<article_id:\d+>/edit/', 	views.edit, 		'portfolio-article-edit'),
 #    Route('/<article_id:\d+>/edit/', 	views.remove, 		'portfolio-article-remove'),

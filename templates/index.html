@@ -70,7 +70,7 @@
 	</div>
 
 	<div class="row" style="position: relative; padding-top: 12px;">
-		<div id="sliderBackground"></div>
+		<div class="fabricBackground"></div>
 		<div class="span10 offset1 sliderContainer" style="padding: 20px 0 20px 0;">
 			<!-- slider container -->
 			<div class='iosSlider'>
@@ -90,7 +90,7 @@
 				</div>
 			</div>
 			<div class = 'slideSelectors'>
-				{% for project in projects %}
+				{% for project in featured %}
 					<div class = 'item'></div>
 				{% endfor %}
 			</div>
@@ -153,9 +153,8 @@
 	<div class="row">
 		<div class="span12">
 			<!--<hr />-->
-			<h2>Expertise cloud</h2>
-			<div style="text-align: center;">
-			<div style="width: 75%; margin: 0 auto;" id="expertises">
+			<div style="text-align: center; padding: 0 20px;">
+			<div style="margin: 0 auto; overflow: visible;" id="expertises">
 				<span>PHP</span>
 				<span>CSS</span>
 				<span>Ruby on Rails</span>

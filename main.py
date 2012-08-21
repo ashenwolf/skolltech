@@ -68,7 +68,7 @@ app = webapp2.WSGIApplication([
     routes.PathPrefixRoute('/blog', skollblog.routes),
 
     # portfolio
-    #routes.PathPrefixRoute('/portfolio', skollfolio.routes),
+    routes.PathPrefixRoute('/portfolio', skollfolio.routes),
 
     # projects
     #routes.PathPrefixRoute('/projects', skollprojects.routes),
