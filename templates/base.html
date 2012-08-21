@@ -22,7 +22,7 @@
 			<div class="span4"><a href="/"><img src="/static/images/skoll-tech-logo4.png" alt="Skoll Technologies" /></a></div>
 			<div class="span8"><p style="text-align: right; padding-top: 10px;">
 				<a href="/" class="btn btn-large {% if section %}noback{% endif %}">Hello!</a> &nbsp;
-				<a href="/about/" class="btn btn-large {% if section != "portfolio" %}noback{% endif %}">About Us</a> &nbsp;
+				<a href="/about/" class="btn btn-large {% if section != "about" %}noback{% endif %}">About Us</a> &nbsp;
 				<a href="{{ url('portfolio-index') }}" class="btn btn-large {% if section != "portfolio" %}noback{% endif %}">Our Portfolio</a> &nbsp;
 				<!--<a href="/projects/" class="btn btn-large {% if section != "projects" %}noback{% endif %}">Our Projects</a> &nbsp;-->
 				<a href="{{ url('blog-index') }}" class="btn btn-large {% if section != "blog" %}noback{% endif %}">Scrapbook</a> &nbsp;
