@@ -17,11 +17,11 @@
   <tbody>
     {% for project in projects %}
     <tr id="project-{{ project.key().id() }}">
-      <td>
+      <td style="width: 32px;">
       	<a href="{{ url('admin-projects-edit', project_id=project.key().id()) }}"><i class="icon-edit"></i></a>
       	<a href="#" onClick="removeProject({{ project.key().id() }})"><i class="icon-trash"></i></a>
       </td>
-      <td>{{ project.title }}</td>
+      <td style="width: 200px;">{{ project.title }}</td>
       <td>{{ project.teaser }}</td>
       <td>&nbsp;</td>
       <td>{{ project.is_published }}</td>

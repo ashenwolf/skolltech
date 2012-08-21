@@ -5,8 +5,8 @@
 {% block content %}
 	<div class="row">
 		<div class="span12">
-			<a href="{{ url('admin-blog-post-add') }}" class="btn btn-large" style="float: right;"><i class="icon-plus"></i> New post</a>
-			<h1>{% trans %}Blog{% endtrans %}</h1><hr />
+			{% if is_admin %}<a href="{{ url('admin-blog-post-add') }}" class="btn btn-large" style="float: right;"><i class="icon-plus"></i> New post</a>{% endif %}
+			<h1>{% trans %}Blog{% endtrans %}</h1><br /><br />
 		</div>
 	</div>
 
@@ -27,7 +27,6 @@
 					</div>
 				</div>
 			</div>
-			<hr />
 			{% endfor %}
 		</div>
 
