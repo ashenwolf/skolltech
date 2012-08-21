@@ -1,0 +1,94 @@
+{% extends 'admin/base.html' %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="/static/css/jquery.fileupload-ui.css">
+	<!-- markItUp! skin -->
+	<link rel="stylesheet" type="text/css" href="/static/markitup/skins/markitup/style.css" />
+	<!--  markItUp! toolbar skin -->
+	<link rel="stylesheet" type="text/css" href="/static/markitup/sets/default/style.css" />
+
+{% endblock %}
+
+{% block adminarea %}
+	<h2>{% trans %}Contacts settings{% endtrans %}</h2>
+
+	{% if form.errors %}
+	    <div class="errors alert">
+	    	<h4 class="alert-heading">Please correct the following errors!</h4><br />
+	        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+	            {% for error in field_errors %}
+	                <p><strong>{{ form[field_name].label.text }}</strong>: {{ error }}</p>
+	            {% endfor %}
+	        {% endfor %}
+	    </div>
+	{% endif %}
+
+	{% if success %}
+	    <div class="alert-success alert">
+	    	<a class="close" data-dismiss="alert" href="#">×</a>
+	    	<h4 class="alert-heading">Post saved!</h4>
+	    </div>
+	{% endif %}
+
+	<form class="form-horizontal" method="POST" action=".">
+		<fieldset>
+			<div class="control-group {% if form.contacts_page.errors %}error{% endif %}">
+				{{ form.contacts_page.label(class="control-label") }}
+				<div class="controls">
+					{{ form.contacts_page(class="input-xlarge span7") }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.address.errors %}error{% endif %}">
+				{{ form.address.label(class="control-label") }}
+				<div class="controls">
+					{{ form.address(class="input-xlarge span7") }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.our_facebook.errors %}error{% endif %}">
+				{{ form.our_facebook.label(class="control-label") }}
+				<div class="controls">
+					{{ form.our_facebook(class="input-xlarge span7") }}
+				</div>
+			</div>
+			<div class="control-group {% if form.our_twitter.errors %}error{% endif %}">
+				{{ form.our_twitter.label(class="control-label") }}
+				<div class="controls">
+					{{ form.our_twitter(class="input-xlarge span7") }}
+				</div>
+			</div>
+			<div class="control-group {% if form.our_googleplus.errors %}error{% endif %}">
+				{{ form.our_googleplus.label(class="control-label") }}
+				<div class="controls">
+					{{ form.our_googleplus(class="input-xlarge span7") }}
+				</div>
+			</div>
+			<div class="control-group {% if form.our_linkedin.errors %}error{% endif %}">
+				{{ form.our_linkedin.label(class="control-label") }}
+				<div class="controls">
+					{{ form.our_linkedin(class="input-xlarge span7") }}
+				</div>
+			</div>
+		</fieldset>
+	</form>
+
+	<div class="form-actions" style="margin-left: 160px;">
+		<div>
+		<a href="#" onclick="document.forms[0].submit();return false;" class="btn btn-primary"><i class="icon-ok-sign icon-white"></i> {% trans %}Save settings{% endtrans %}</a>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascript %}
+<!-- markItUp! -->
+<script type="text/javascript" src="/static/markitup/jquery.markitup.js"></script>
+<!-- markItUp! toolbar settings -->
+<script type="text/javascript" src="/static/markitup/sets/default/set.js"></script>
+
+<script type="text/javascript" >
+   $(document).ready(function() {
+      $("#content").markItUp(mySettings);
+   });
+</script>
+{% endblock %}

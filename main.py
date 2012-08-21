@@ -56,6 +56,7 @@ config = {
             },
 	    'globals': {
             'url': webapp2.uri_for,
+            'settings': skolladmin.models.SiteSettings,
 	        },
         },
     'template_path': os.path.join(os.path.dirname(__file__), 'templates/'),

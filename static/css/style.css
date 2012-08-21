@@ -242,3 +242,7 @@ body {
 h1, h2, h3, h4, h5 {
 	text-shadow: #fff 1px 1px;
 }
+
+#page-footer address {
+	color: #aaa;
+}

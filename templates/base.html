@@ -30,17 +30,45 @@
 			</p>
 			</div>
 		</div>
-<!--
-		<div class="row">
-			<div class="span12"><hr /></div>
-		</div>-->
 
 {% block content %}{% endblock %}
 
-		<div id="page-footer" class="row" style="position: relative; margin-top: 20px;">
+		<div id="page-footer" class="row" style="position: relative; margin-top: 20px; padding: 40px 0;">
 			<div class="fabricBackground"></div>
-			<div class="span12"><!--<hr />--><br>
-				<p style="color: #aaa;">&copy; 2012 Skoll Technologies. All rights reserved.</p>
+			<div class="span12">
+				<div class="row">
+					<div class="span9">
+						<h4 style="color: #aaa; text-shadow: #222 1px 1px;">Hire Us</h3>
+						<p style="color: #aaa;">Why should you hire us?</p>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="span3">
+						<h4 style="color: #aaa; text-shadow: #222 1px 1px;">Our Address</h4>
+						<small style="color: #aaa;">{{ settings.get('address') }}</small>
+					</div>
+					<div class="span3">
+						<h4 style="color: #aaa; text-shadow: #222 1px 1px;">Contact Us</h4>
+						<p style="color: #aaa;"><small>Phone: +38 (091)</sup> 3095289<br />
+							E-Mail: <a href="#">contact@skolltech.com</a><br />
+							Skype: graywolfua</small></p>
+						<br /><br />
+					</div>
+					<div class="span3">
+						<h4 style="color: #aaa; text-shadow: #222 1px 1px;">Stay in Touch</h4>
+						<p style="color: #aaa; font-size: small;">
+							<a href="#"><img src="/static/images/icons/facebook.png"></a>
+							<a href="#"><img src="/static/images/icons/googleplusalt.png"></a>
+							<a href="#"><img src="/static/images/icons/twitter2.png"></a>
+							<a href="#"><img src="/static/images/icons/linkedin.png"></a>
+							<a href="#"><img src="/static/images/icons/rss.png"></a>
+						</p>
+					</div>
+					<div class="span3">
+						<p style="color: #aaa; margin-top: 5px;"><small>Copyright &copy; 2011-2012 Skoll Technologies.<br/>All rights reserved.</small></p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
