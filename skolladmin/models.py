@@ -1,5 +1,6 @@
 import datetime
 from google.appengine.ext import db
+from misc.forms import TagListField
 
 class SiteSettings(db.Model):
     value = db.TextProperty()
@@ -24,3 +25,13 @@ class SiteSettings(db.Model):
             print item
             item.value = settings[item.key().name()]
         db.put(new_settings)
+
+
+class StaticPage(db.Model):
+    title = db.StringProperty(required=True)
+    slug = db.StringProperty(required=True)
+
+    content = db.TextProperty()
+
+    tags = db.StringListProperty()
+    is_published = db.BooleanProperty(default = False)

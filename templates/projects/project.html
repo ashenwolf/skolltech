@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.title }} - {% trans %}Project{% endtrans %} - {% endblock %}
+
+{% block javascript %}
+
+	<script type="text/javascript" src="/static/js/jquery.easing-1.3.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.iosslider.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/* some custom settings */
+			$('.iosSlider').iosSlider({
+				desktopClickDrag: true,
+				//snapToChildren: true,
+				//navSlideSelector: '.sliderContainer .slideSelectors .item',
+				//onSlideComplete: slideComplete,
+				//onSliderLoaded: sliderLoaded,
+				//onSlideChange: slideChange,
+				infiniteSlider: true,
+				autoSlide: true,
+			});
+
+			$('.iosSlider').iosSlider('update');
+		});
+	</script>
+
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="span9" class="blogpost">
+			<h1>{{ project.title }}</h1><br>
+		</div>
+	</div>
+
+	<div class="row">
+<!--		<div class="span3">
+			{% for image in project.imagerecord_set %}
+				<img src="{{ image.image | serve_image(240, False) }}">
+			{% endfor %}
+		</div>-->
+
+		<div class="span12">
+			<p>{{ project.date_created }}</p>
+
+			<div>
+				{{ project.description }}
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="span3">
+			<h4>Problem</h4>
+			{{ project.problem }}
+		</div>
+		<div class="span3">
+			<h4>Solution</h4>
+			<h4>{{ project.solution }}</h4>
+		</div>
+		<div class="span3">
+			<h4>Client</h4>
+			<h4>{{ project.customer }}</h4>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="span12">
+			<div style="position: relative; padding-top: 12px;">
+				<!--<div class="fabricBackground"></div>-->
+				<div class="sliderContainer" style="padding: 10px 0 10px 0; height: 300px;">
+					<!-- slider container -->
+					<div class='iosSlider' style="">
+						<!-- slider -->
+						<ul class='thumbnails slider' style="padding-left: 0;">
+							<!-- slides -->
+							{% for image in project.imagerecord_set %}
+							<li class="span3">
+								<a class="thumbnail" href="{{ image.image | serve_image(800, False) }}" style="padding: 10px;"><img class="item" src="{{ image.image | serve_image(320, True) }}" style="max-height: 270px; float: none;" /></a>
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+					<div class = 'slideSelectors'>
+						{% for project in featured %}
+							<div class = 'item'></div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="span7"><p>Tags: 
+			{% for tag in project.tags %}
+				<a href="#">{{ tag }}</a>{% if not loop.last %}, {% endif %}
+			{% endfor %}</p>
+		</div>
+		<div class="span2">
+			{% if is_admin %}<a href="{{ url('admin-projects-edit', project_id = project.key().id()) }}" class="btn pull-right"><i class="icon-edit"></i> Edit</a>{% endif %}
+		</div>
+	</div>
+
+{% endblock %}

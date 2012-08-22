@@ -12,7 +12,7 @@ class index(BaseHandler):
         }
 
 class project(BaseHandler):
-    @render_to("projects/item.html", 0)
+    @render_to("projects/project.html", 0)
     def get(self, project_id):
         project = PortfolioProject.get_by_id(long(project_id))
 

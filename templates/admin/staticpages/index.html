@@ -1,0 +1,53 @@
+{% extends 'admin/base.html' %}
+
+{% block adminarea %}
+<h2>{% trans %}Manage portfolio projects{% endtrans %}</h2>
+<hr />
+
+<table class="table table-stripped table-condensed">
+  <thead>
+    <tr>
+      <th>&nbsp;</th>
+      <th>Title</th>
+      <th>Published?</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for page in pages %}
+    <tr id="item-{{ page.key().id() }}">
+      <td style="width: 32px;">
+      	<a href="{{ url('admin-staticpage-edit', page_id=page.key().id()) }}"><i class="icon-edit"></i></a>
+      	<a href="#" onClick="removeItem({{ page.key().id() }})"><i class="icon-trash"></i></a>
+      </td>
+      <td>{{ page.title }}</td>
+      <td>{{ page.is_published }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<div class="form-actions">
+    <a href="{{ url('admin-staticpage-add') }}" class="btn btn-primary"><i class="icon-plus icon-white"></i> New static page</a>
+
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+function removeItem(id) {
+  jQuery.ajax({
+    url: "{{ url('admin-remove-entity') }}",
+    data: {
+      item_type: "StaticPage",
+      item_id: id,
+    },
+    type: "POST",
+    dataType: "json",
+    success: function(data) {
+      if (data.result == "ok")
+          $('#item-' + id).remove();
+    }
+  });
+}
+</script>
+{% endblock %}

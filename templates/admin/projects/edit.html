@@ -4,6 +4,10 @@
 
 {% block css %}
 	<link rel="stylesheet" type="text/css" href="/static/css/jquery.fileupload-ui.css">
+	<!-- markItUp! skin -->
+	<link rel="stylesheet" type="text/css" href="/static/markitup/skins/markitup/style.css" />
+	<!--  markItUp! toolbar skin -->
+	<link rel="stylesheet" type="text/css" href="/static/markitup/sets/default/style.css" />
 {% endblock %}
 
 {% block adminarea %}
@@ -202,25 +206,14 @@ function removeImage(id) {
 }
 </script>
 {% endif %}
+<!-- markItUp! -->
+<script type="text/javascript" src="/static/markitup/jquery.markitup.js"></script>
+<!-- markItUp! toolbar settings -->
+<script type="text/javascript" src="/static/markitup/sets/default/set.js"></script>
 
-<script src="/static/ckeditor/ckeditor.js" type="text/javascript"></script>
-<script type="text/javascript">
-	//jQuery(document).noConflict();
-
-	jQuery(document).ready(function($) {
-		CKEDITOR.replace('description', {
-			//toolbar: 'Basic',
-			toolbar: [
-					{ name: 'styles', 		items : [ 'Format' ] },
-					{ name: 'basicstyles', 	items : [ 'Bold','Italic','Strike','-','RemoveFormat' ] },
-					{ name: 'paragraph', 	items : [ 'NumberedList','BulletedList','-','Outdent','Indent' ] },
-					{ name: 'links', 		items : [ 'Link','Unlink','Anchor' ] },
-					{ name: 'insert', 		items : [ 'Image' ] },
-				],
-			skin: 'BootstrapCK-Skin',
-			language: 'en',
-			resize_enabled: false,
-		}); 
-	});
+<script type="text/javascript" >
+   $(document).ready(function() {
+      $("#description").markItUp(mySettings);
+   });
 </script>
 {% endblock %}

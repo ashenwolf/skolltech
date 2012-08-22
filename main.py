@@ -85,8 +85,8 @@ app = webapp2.WSGIApplication([
 
     # index page
     webapp2.Route(r'/', handler=views.home, name='home'),
+    webapp2.Route(r'/<page_slug:[a-z\-\.\z]+>/', handler=views.staticpage, name="staticpage"),
     webapp2.Route(r'/error/<error_id:\w+>', handler=views.error, name='error'),
-
 
 ], debug=True, config=config)
 	

@@ -30,6 +30,18 @@
 				  <li class="divider"></li>
 				  
 				  <li class="nav-header">
+				    Static pages
+				  </li>
+				  <li class="{% if admin_section == "admin-staticpage-add" %}active{% endif %}">
+				    <a href="{{ url('admin-staticpage-add') }}">New page</a>
+				  </li>
+				  <li class="{% if admin_section == "admin-staticpage-index" %}active{% endif %}">
+				    <a href="{{ url('admin-staticpage-index') }}">Static pages</a>
+				  </li>
+
+				  <li class="divider"></li>
+				  
+				  <li class="nav-header">
 				    Blog
 				  </li>
 				  <li class="{% if admin_section == "admin-blog-posts-new" %}active{% endif %}">

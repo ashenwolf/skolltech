@@ -69,7 +69,7 @@ def admin_required(func):
 		if users.is_current_user_admin():
 			return func(self, *args, **kw)
 		elif users.get_current_user():
-			return self.redirect_to('error', error_id='forbidden')
+			return self.redirect_to('error', error_id=403)
 		else:
 			return self.redirect(users.create_login_url(self.request.uri))
 	return wrapper

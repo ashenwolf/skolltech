@@ -22,11 +22,11 @@
 			<div class="span4"><a href="/"><img src="/static/images/skoll-tech-logo4.png" alt="Skoll Technologies" /></a></div>
 			<div class="span8"><p style="text-align: right; padding-top: 10px;">
 				<a href="/" class="btn btn-large {% if section %}noback{% endif %}">Hello!</a> &nbsp;
-				<a href="/about/" class="btn btn-large {% if section != "about" %}noback{% endif %}">About Us</a> &nbsp;
+				<a href="{{ url('staticpage', page_slug = 'about') }}" class="btn btn-large {% if section != "about" %}noback{% endif %}">About Us</a> &nbsp;
 				<a href="{{ url('portfolio-index') }}" class="btn btn-large {% if section != "portfolio" %}noback{% endif %}">Our Portfolio</a> &nbsp;
+				<a href="{{ url('blog-index') }}" class="btn btn-large {% if section != "blog" %}noback{% endif %}">Our notes</a> &nbsp;
+				<a href="{{ url('staticpage', page_slug = 'contact') }}" class="btn btn-large {% if section != "contacts" %}noback{% endif %}">Contact Us</a> &nbsp;
 				<!--<a href="/projects/" class="btn btn-large {% if section != "projects" %}noback{% endif %}">Our Projects</a> &nbsp;-->
-				<a href="{{ url('blog-index') }}" class="btn btn-large {% if section != "blog" %}noback{% endif %}">Scrapbook</a> &nbsp;
-				<a href="/contact/" class="btn btn-large {% if section != "contacts" %}noback{% endif %}">Contact Us</a> &nbsp;
 			</p>
 			</div>
 		</div>
@@ -51,18 +51,18 @@
 					<div class="span3">
 						<h4 style="color: #aaa; text-shadow: #222 1px 1px;">Contact Us</h4>
 						<p style="color: #aaa;"><small>Phone: +38 (091)</sup> 3095289<br />
-							E-Mail: <a href="#">contact@skolltech.com</a><br />
+							E-Mail: <a href="#">contact@skoll.com.ua</a><br />
 							Skype: graywolfua</small></p>
 						<br /><br />
 					</div>
 					<div class="span3">
 						<h4 style="color: #aaa; text-shadow: #222 1px 1px;">Stay in Touch</h4>
 						<p style="color: #aaa; font-size: small;">
-							<a href="#"><img src="/static/images/icons/facebook.png"></a>
-							<a href="#"><img src="/static/images/icons/googleplusalt.png"></a>
-							<a href="#"><img src="/static/images/icons/twitter2.png"></a>
-							<a href="#"><img src="/static/images/icons/linkedin.png"></a>
-							<a href="#"><img src="/static/images/icons/rss.png"></a>
+							{% if settings.get('our_facebook') %}<a href="{{ settings.get('our_facebook') }}"><img src="/static/images/icons/facebook.png"></a>{% endif %}
+							{% if settings.get('our_googleplus') %}<a href="{{ settings.get('our_googleplus') }}"><img src="/static/images/icons/googleplusalt.png"></a>{% endif %}
+							{% if settings.get('our_twitter') %}<a href="{{ settings.get('our_twitter') }}"><img src="/static/images/icons/twitter2.png"></a>{% endif %}
+							{% if settings.get('our_linkedin') %}<a href="{{ settings.get('our_linkedin') }}"><img src="/static/images/icons/linkedin.png"></a>{% endif %}
+							<a href="/feed/"><img src="/static/images/icons/rss.png"></a>
 						</p>
 					</div>
 					<div class="span3">

@@ -227,7 +227,7 @@ body {
 	box-shadow: 0px 0px 2px 2px #ccc;
 }
 
-#markItUpContent {
+#markItUpContent, #markItUpDescription, #markItUpAddress {
 	width: 93.5%;
 }
 

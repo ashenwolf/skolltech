@@ -4,10 +4,19 @@ from webapp2 import Route
 import views
 
 routes = [
-    Route(r'/', 					views.dashboard,		'admin-dashboard'),
-    Route(r'/contacts/', 			views.contacts,			'admin-contacts'),
+	# site settings
+    Route(r'/', 					views.dashboard,			'admin-dashboard'),
+    Route(r'/contacts/', 			views.contacts,				'admin-contacts'),
+
+    # static pages
+    Route(r'/staticpages/', 		views.staticpages_index,	'admin-staticpage-index'),
+    Route(r'/satticpages/add/', 	views.staticpages_add,		'admin-staticpage-add'),
+    Route(r'/satticpages/<page_id:\d+>/edit/', 	views.staticpages_edit,		'admin-staticpage-edit'),
+
+    # delete item
+    Route(r'/remove-entity/', 		views.remove,				'admin-remove-entity'),
 
     # authentication
-    Route(r'/login', handler=views.login, name='user-login'),
-    Route(r'/logout', handler=views.logout, name='user-logout'),
+    Route(r'/login/', 				views.login, 				'user-login'),
+    Route(r'/logout/', 				views.logout,				'user-logout'),
 ]

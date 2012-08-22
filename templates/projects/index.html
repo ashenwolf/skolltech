@@ -40,7 +40,7 @@
 			<ul class="thumbnails">
 			  	{% for project in projects %}
 				  <li class="span4">
-				    <a herf="#" class="thumbnail thumb-project" style="position: relative;">
+				    <a href="{{ url('portfolio-project', project_id = project.key().id()) }}" class="thumbnail thumb-project" style="position: relative;">
 				      <div style="background: url('{{ project.teaser_image()|serve_image(400, False) }}') no-repeat center left; background-size: 100%; width:100%; height: 180px;"></div><br>
 				      <h4>{{ project.title }}</h4>
 				      <p style="line-height: 1.5em;">{{ project.teaser }}</p>
