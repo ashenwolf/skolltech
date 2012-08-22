@@ -65,14 +65,14 @@
 				  <li class="{% if admin_section == "admin-projects-portfolio" %}active{% endif %}">
 				    <a href="{{ url('admin-projects-portfolio') }}">Portfolio projects</a>
 				  </li>
-				  <li>
+				  <!--<li>
 				    <a href="#">Home projects</a>
-				  </li>
+				  </li>-->
 				  <li class="{% if admin_section == "admin-projects-categories" %}active{% endif %}">
 				    <a href="{{ url('admin-projects-categories') }}">Categories</a>
 				  </li>
 				  <li>
-				    <a href="#">Technologies</a>
+				    <a href="{{ url('admin-projects-technologies') }}">Technologies</a>
 				  </li>
 
 				  <li class="divider"></li>

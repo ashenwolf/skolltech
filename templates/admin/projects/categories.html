@@ -1,7 +1,7 @@
 {% extends 'admin/base.html' %}
 
 {% block adminarea %}
-<h2>{% trans %}Mange blog categories{% endtrans %}</h2>
+<h2>{% trans %}Mange project categories{% endtrans %}</h2>
 <hr />
 
 <table class="table table-stripped table-condensed">
@@ -34,7 +34,7 @@
         <span class="caret"></span>
       </a>
       <div class="dropdown-menu" style="padding: 8px;">
-            <form method="POST" action="{{ url('admin-blog-categories-add') }}">
+            <form method="POST" action="{{ url('admin-projects-categories-add') }}">
             <fieldset>
                 <div class="controls">
                     <label class="control-label" for="title">Category name</label>
@@ -62,7 +62,7 @@ function removeCategory(id) {
   jQuery.ajax({
     url: "{{ url('admin-remove-entity') }}",
     data: {
-      item_type: "BlogCategory",
+      item_type: "ProjectCategory",
       item_id: id,
     },
     type: "POST",

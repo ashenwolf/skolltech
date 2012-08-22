@@ -24,7 +24,7 @@
       </td>
       <td>{{ post.title }}</td>
       <td>{% if post.author %}{{ post.author }}{% endif %}</td>
-      <td>&nbsp;</td>
+      <td>{{ post.category }}</td>
       <td>{{ post.date_created }}</td>
       <td>{{ post.is_published }}</td>
     </tr>
@@ -42,9 +42,10 @@
 <script type="text/javascript">
 function removePost(id) {
   jQuery.ajax({
-    url: "{{ url('admin-blog-post-delete') }}",
+    url: "{{ url('admin-remove-entity') }}",
     data: {
-      post_id: id,
+      item_type: "BlogPost",
+      item_id: id,
     },
     type: "POST",
     dataType: "json",

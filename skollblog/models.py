@@ -9,6 +9,10 @@ class BlogCategory(db.Model):
     slug = db.StringProperty(required=True)
     order = db.IntegerProperty(required=True, default=1)
 
+    def __unicode__(self):
+        return self.title
+
+
 class BlogPost(db.Model):
     title = db.StringProperty(required=True)
     slug = db.StringProperty(required=True)

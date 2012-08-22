@@ -8,8 +8,8 @@ from google.appengine.api import images
 from misc.decorators import render_to, admin_required, login_required, BaseHandler 
 from skollimages.models import ImageRecord
 
-from models import PortfolioProject
-from forms import PortfolioProjectForm, HomeProjectForm
+from models import PortfolioProject, ProjectCategory
+from forms import PortfolioProjectForm, HomeProjectForm, ProjectCategoryForm, TechnologyForm
 
 class portfolio(BaseHandler):
     @login_required
@@ -22,17 +22,6 @@ class portfolio(BaseHandler):
             "projects": projects,
         }
 
-
-class categories(BaseHandler):
-    @admin_required
-    @render_to("admin/projects/categories.html", 0)
-    def get(self):
-        categories = ProjectCategory.all()
-
-        return {
-            "admin_section": "admin-projects-categories",
-            "categories": categories,
-        }
 
 class add(BaseHandler):
     @login_required
@@ -109,12 +98,104 @@ class set_teaser(BaseHandler):
             }))
 
 
-class delete(BaseHandler):
-    @login_required
+#class delete(BaseHandler):
+#    @login_required
+#    def post(self):
+#        project = PortfolioProject.get_by_id(long(self.request.params.get("project_id", None)))
+#        for blob in project.imagerecord_set: blob.image.delete()
+#        db.delete(project.imagerecord_set)
+#        project.delete()
+#        self.response.headers['Content-Type'] = 'application/json'
+#        self.response.out.write(json.dumps({"result": "ok"}))
+
+class categories(BaseHandler):
+    @admin_required
+    @render_to("admin/projects/categories.html", 0)
+    def get(self):
+        categories = ProjectCategory.all()
+
+        return {
+            "admin_section": "admin-projects-categories",
+            "categories": categories,
+        }
+
+
+class categories_add(BaseHandler):
+    @admin_required
     def post(self):
-        project = PortfolioProject.get_by_id(long(self.request.params.get("project_id", None)))
-        for blob in project.imagerecord_set: blob.image.delete()
-        db.delete(project.imagerecord_set)
-        project.delete()
-        self.response.headers['Content-Type'] = 'application/json'
-        self.response.out.write(json.dumps({"result": "ok"}))
+        form = ProjectCategoryForm(self.request.POST)
+
+        if form.validate():
+            title = form.data["title"]
+            slug = title.lower().replace(" ", "-")
+            category = ProjectCategory(title = title, slug = slug)
+            category.put()
+
+        self.redirect_to('admin-projects-categories')
+
+class categories_edit(BaseHandler):
+    @admin_required
+    def post(self, category_id):
+        form = ProjectCategoryForm(self.request.POST)
+
+        if form.validate():
+            slug = form.data["title"].lower().replace(" ", "-")
+            category = ProjectCategory.get(long(category_id))
+            form.populate_obj(category)
+            category.put()
+
+        return {
+            "result": {
+               "id": category.key().id(),
+               "title": category.title,
+               "slug": category.slug,
+           }
+        }
+
+
+
+
+
+class technologies(BaseHandler):
+    @admin_required
+    @render_to("admin/projects/categories.html", 0)
+    def get(self):
+        categories = ProjectCategory.all()
+
+        return {
+            "admin_section": "admin-projects-categories",
+            "categories": categories,
+        }
+
+
+class technologies_add(BaseHandler):
+    @admin_required
+    def post(self):
+        form = ProjectCategoryForm(self.request.POST)
+
+        if form.validate():
+            title = form.data["title"]
+            slug = title.lower().replace(" ", "-")
+            category = ProjectCategory(title = title, slug = slug)
+            category.put()
+
+        self.redirect_to('admin-projects-categories')
+
+class technologies_edit(BaseHandler):
+    @admin_required
+    def post(self, category_id):
+        form = ProjectCategoryForm(self.request.POST)
+
+        if form.validate():
+            slug = form.data["title"].lower().replace(" ", "-")
+            category = ProjectCategory.get(long(category_id))
+            form.populate_obj(category)
+            category.put()
+
+        return {
+            "result": {
+               "id": category.key().id(),
+               "title": category.title,
+               "slug": category.slug,
+           }
+        }

@@ -21,12 +21,10 @@
 
 				    <div class="nav-collapse">
 					    <ul class="nav">
-						  <li class="active"><a href="#">All</a></li>
-						  <li><a href="#">Mobile applications</a></li>
-						  <li><a href="#">PC applications</a></li>
-						  <li><a href="#">Mac applications</a></li>
-						  <li><a href="#">Websites</a></li>
-						  <li><a href="#">Other</a></li>
+					  	<li {% if not cur_category %}class="active"{% endif %}><a href="{{ url('portfolio-index') }}">All</a></li>
+					    {% for category in categories %}
+						  <li {% if cur_category and category.key() == cur_category.key() %}class="active"{% endif %}><a href="{{ url('portfolio-index-category', category = category.slug) }}">{{ category.title }}</a></li>
+						{% endfor %}
 					    </ul>
 					</div>
 			    </div>

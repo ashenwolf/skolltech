@@ -38,9 +38,10 @@
 <script type="text/javascript">
 function removeProject(id) {
   jQuery.ajax({
-    url: "{{ url('admin-projects-delete') }}",
+    url: "{{ url('admin-remove-entity') }}",
     data: {
-      project_id: id,
+      item_type: "PortfolioProject",
+      item_id: id,
     },
     type: "POST",
     dataType: "json",

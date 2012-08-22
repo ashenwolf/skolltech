@@ -60,6 +60,12 @@
 					<p class="help-block">No HTML allowed. Plain text only.</p>
 				</div>
 			</div>
+			<div class="control-group {% if form.category.errors %}error{% endif %}">
+				{{ form.category.label(class="control-label") }}
+				<div class="controls">
+					{{ form.category(class="input-xlarge span7") }}
+				</div>
+			</div>
 			<div class="control-group {% if form.content.errors %}error{% endif %}">
 				{{ form.content.label(class="control-label") }}
 				<div class="controls">
@@ -102,7 +108,6 @@
 		<a href="#" class="btn">Publish post</a>
 		{% if post %}
 		<a href="{{ url('blog-post', post_id = post.key().id()) }}" class="btn"><i class="icon-eye-open"></i> Preview</a>
-		<a href="{{ url('admin-blog-post-delete', post_id = post.key().id()) }}" class="btn btn-danger pull-right"><i class="icon-remove-sign icon-white"></i> Delete post</a>
 		{% endif %}
 		</div>
 	</div>

@@ -3,9 +3,9 @@ from google.appengine.ext import db
 from google.appengine.ext import blobstore
 
 from misc.decorators import render_to, admin_required, login_required, BaseHandler 
-from models import BlogPost
+from models import BlogPost, BlogCategory
 from skollimages.models import ImageRecord
-from forms import BlogPostForm
+from forms import BlogPostForm, BlogCategoryForm
 
 import webapp2
 import json
@@ -18,18 +18,6 @@ class posts(BaseHandler):
 
         return {
             "admin_section": "admin-blog-posts",
-            "posts": posts,
-        }
-
-
-class categories(BaseHandler):
-    @admin_required
-    @render_to("admin/blog/categories.html", 0)
-    def get(self):
-        posts = BlogPost.all().order("-date_created")
-
-        return {
-            "admin_section": "admin-blog-categories",
             "posts": posts,
         }
 
@@ -78,11 +66,11 @@ class edit(BaseHandler):
     @login_required
     @render_to("admin/blog/edit.html", 0)
     def post(self, post_id, extra=""):
-        post = BlogPost.get_by_id(long(post_id))
         form = BlogPostForm(self.request.POST)
         success = False
 
         if form.validate():
+            post = BlogPost.get_by_id(long(post_id))
             form.populate_obj(post)
             post.save()
             success = True
@@ -94,11 +82,57 @@ class edit(BaseHandler):
             "post": post,
         }
 
-class delete(BaseHandler):
+#lass delete(BaseHandler):
+#    def post(self):
+#        post = BlogPost.get_by_id(long(self.request.params.get("post_id", None)))
+#        for blob in post.imagerecord_set: blob.image.delete()
+#        db.delete(post.imagerecord_set)
+#        post.delete()
+#        self.response.headers['Content-Type'] = 'application/json'
+#        self.response.out.write(json.dumps({"result": "ok"}))
+
+
+
+
+class categories(BaseHandler):
+    @admin_required
+    @render_to("admin/blog/categories.html", 0)
+    def get(self):
+        categories = BlogCategory.all()
+
+        return {
+            "admin_section": "admin-blog-categories",
+            "categories": categories,
+        }
+
+class categories_add(BaseHandler):
+    @admin_required
     def post(self):
-        post = BlogPost.get_by_id(long(self.request.params.get("post_id", None)))
-        for blob in post.imagerecord_set: blob.image.delete()
-        db.delete(post.imagerecord_set)
-        post.delete()
-        self.response.headers['Content-Type'] = 'application/json'
-        self.response.out.write(json.dumps({"result": "ok"}))
+        form = BlogCategoryForm(self.request.POST)
+
+        if form.validate():
+            title = form.data["title"]
+            slug = title.lower().replace(" ", "-")
+            category = BlogCategory(title = title, slug = slug)
+            category.put()
+
+        self.redirect_to('admin-blog-categories')
+
+class categories_edit(BaseHandler):
+    @admin_required
+    def post(self, category_id):
+        form = BlogCategoryForm(self.request.POST)
+
+        if form.validate():
+            slug = form.data["title"].lower().replace(" ", "-")
+            category = BlogCategory.get(long(category_id))
+            form.populate_obj(category)
+            category.put()
+
+        return {
+            "result": {
+               "id": category.key().id(),
+               "title": category.title,
+               "slug": category.slug,
+           }
+        }

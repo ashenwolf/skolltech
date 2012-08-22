@@ -8,11 +8,22 @@ from skollimages.models import ImageRecord
 
 class Technology(db.Model):
     name = db.StringProperty(required=True)
-    image = blobstore.BlobReferenceProperty()
+    slug = db.StringProperty(required=True)
+
+    image_small = blobstore.BlobReferenceProperty()
+    image_large = blobstore.BlobReferenceProperty()
+
+    def __unicode__(self):
+        return self.title
 
 class ProjectCategory(db.Model):
     title = db.StringProperty(required=True)
     slug = db.StringProperty(required=True)
+
+    order = db.IntegerProperty(required=True, default=1)
+
+    def __unicode__(self):
+        return self.title
 
 class Project(db.Model):
     title = db.StringProperty(required=True)
