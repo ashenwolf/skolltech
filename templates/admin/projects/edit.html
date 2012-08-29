@@ -7,7 +7,7 @@
 	<!-- markItUp! skin -->
 	<link rel="stylesheet" type="text/css" href="/static/markitup/skins/markitup/style.css" />
 	<!--  markItUp! toolbar skin -->
-	<link rel="stylesheet" type="text/css" href="/static/markitup/sets/default/style.css" />
+	<link rel="stylesheet" type="text/css" href="/static/markitup/sets/skoll/style.css" />
 {% endblock %}
 
 {% block adminarea %}
@@ -152,6 +152,56 @@
 	<div class="form-actions">
 		<a onclick="document.forms[0].submit();return false;" class="btn btn-primary"><i class="icon-ok-sign icon-white"></i> {% trans %}Save project{% endtrans %}</a>
 	</div>
+
+
+	<div class="modal hide fade" id="galleryModal">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	    <h3>Image gallery</h3>
+	  </div>
+	  <div class="modal-body">
+	    <div class="accordion" id="imageAccordion">
+	  	{% for image in project.imagerecord_set %}
+	  		<div class="accordion-group">
+	  			<div class="accordion-heading">
+	  				<a href="#collapse{{ image.key().id() }}" class="accordion-toggle" data-toggle="collapse" data-parent="#imageAccordion">
+	  					<img src="{{ image.image | serve_image(75, True) }}" alt="{{ image.title }}">
+	  				</a>
+	  			</div>
+	  			<div id="collapse{{ image.key().id() }}" class="accordion-body collapse">
+	  				<div class="accordion-inner">
+	  					<div style="float: left; width: 200px;">
+		  					<img src="{{ image.image | serve_image(180, True) }}" alt="{{ image.title }}" />
+	  					</div>
+	  					<div style="margin-left: 205px;">
+	  						<label>Title/alt text</label>
+	  						<input type="text" style="width: 98%;"></input>
+
+	  						<strong>Align</strong>
+	  						<label class="radio"><input type="radio" name="groupAlign" value="none" checked> None</label>
+	  						<label class="radio"><input type="radio" name="groupAlign" value="left"> Left</label>
+	  						<label class="radio"><input type="radio" name="groupAlign" value="center"> Center</label>
+	  						<label class="radio"><input type="radio" name="groupAlign" value="right"> Right</label>
+	  						<br>
+	  						<strong>Size</strong>
+	  						<label class="radio"><input type="radio" name="groupImageSize" value="q"> Square</label>
+	  						<label class="radio"><input type="radio" name="groupImageSize" value="s"> Small</label>
+	  						<label class="radio"><input type="radio" name="groupImageSize" value="m" checked> Medium</label>
+	  						<label class="radio"><input type="radio" name="groupImageSize" value="l"> Large</label>
+	  						<label class="radio"><input type="radio" name="groupImageSize" value="o"> Original</label>
+	  						<hr>
+	    					<button onClick="insertImage('{{ image.image | serve_image(600, False) }}', '')" class="btn btn-primary pull-right">Insert image</button><br />
+	  					</div>
+	  				</div>
+	  			</div>
+	  		</div>
+	    {% endfor %}
+	    </div>
+	  </div>
+	  <div class="modal-footer">
+	    <button class="btn" data-dismiss="modal">Close</button>
+	  </div>
+	</div>	
 {% endblock %}
 
 {% block javascript %}
@@ -218,12 +268,20 @@ function removeImage(id) {
 		}
 	});
 }
+
+function insertImage(url, alt) {
+	var image = [
+		'<img src="' + url + '" alt="' + alt + '" />\n'
+	];
+	$(".collapse").collapse();
+	$.markItUp({ replaceWith: image.join('') });
+}
 </script>
 {% endif %}
 <!-- markItUp! -->
 <script type="text/javascript" src="/static/markitup/jquery.markitup.js"></script>
 <!-- markItUp! toolbar settings -->
-<script type="text/javascript" src="/static/markitup/sets/default/set.js"></script>
+<script type="text/javascript" src="/static/markitup/sets/skoll/set.js"></script>
 
 <script type="text/javascript" >
    $(document).ready(function() {

@@ -1,0 +1,72 @@
+/* -------------------------------------------------------------------
+// markItUp!
+// By Jay Salvat - http://markitup.jaysalvat.com/
+// ------------------------------------------------------------------*/
+.markItUp .markItUpButton1 a {
+	background-image:url(images/bold.png);
+}
+.markItUp .markItUpButton2 a {
+	background-image:url(images/italic.png);
+}
+.markItUp .markItUpButton3 a {
+	background-image:url(images/stroke.png);
+}
+
+.markItUp .markItUpButton4 a {
+	background-image:url(images/list-bullet.png); 
+}
+.markItUp .markItUpButton5 a {
+	background-image:url(images/list-numeric.png);
+}
+
+.markItUp .markItUpButton6 a {
+	background-image:url(images/picture.png); 
+}
+.markItUp .markItUpButton7 a {
+	background-image:url(images/link.png);
+}
+
+.markItUp .markItUpButton8 a {
+	background-image:url(images/clean.png);
+}
+.markItUp .preview a {
+	background-image:url(images/preview.png);
+}
+
+
+/* Styles for InlineUpload widget by brian ally, zijn digital
+ * Add these to the bottom of the default set stylesheet.
+ * Don't forget to supply a cancel.png!
+ */
+.markItUpInlineUpload
+{
+	position: absolute;
+	z-index: 100;
+	width: 300px;
+	margin: 22px 0 0 40px;
+	padding: 1em;
+	background-color: #EEE;
+	border:3px solid #3C769D;
+	border-top-color: #EEE;
+}
+.markItUpInlineUpload > div { position: relative; } /* for positioning "loading" image */
+
+.markItUpInlineUpload label
+{
+	float: left; clear: left;
+	width: 4em; height: 2em;
+	padding-right: .5em;
+	font-size: 80%;
+	font-weight: bold;
+	color: #666;
+	text-align: right; 
+}
+#inline_upload_close
+{
+	float: right;
+	width: 16px; height: 16px;
+	margin-top: 4px;
+	background: transparent url(images/cancel.png) 0 0 no-repeat;
+	cursor: pointer;
+}
+#inline_upload_iframe { display: none; }
