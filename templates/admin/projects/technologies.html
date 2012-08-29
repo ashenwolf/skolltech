@@ -1,27 +1,27 @@
 {% extends 'admin/base.html' %}
 
 {% block adminarea %}
-<h2>{% trans %}Mange blog categories{% endtrans %}</h2>
+<h2>{% trans %}Mange project technologies{% endtrans %}</h2>
 <hr />
 
 <table class="table table-stripped table-condensed">
   <thead>
     <tr>
       <th style="width: 32px;">&nbsp;</th>
-      <th>Category</th>
+      <th>Technology</th>
       <th>Slug</th>
     </tr>
   </thead>
   <tbody>
-    {% for category in categories %}
+    {% for technology in technologies %}
     <tr>
-    <tr id="category-{{ category.key().id() }}">
+    <tr id="technology-{{ technology.key().id() }}">
       <td>
         <a href="#"><i class="icon-edit"></i></a>
-        <a href="#" onClick="removeCategory({{ category.key().id() }})"><i class="icon-trash"></i></a>
+        <a href="#" onClick="removeTechnology({{ technology.key().id() }})"><i class="icon-trash"></i></a>
       </td>
-      <td>{{ category.title }}</td>
-      <td>{{ category.slug }}</td>
+      <td>{{ technology.title }}</td>
+      <td>{{ technology.slug }}</td>
     </tr>
     {% endfor %}
   </tbody>
@@ -30,14 +30,14 @@
 <div class="form-actions">
     <div class="btn-group">
       <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-        <i class="icon-plus icon-white"></i> New category
+        <i class="icon-plus icon-white"></i> New Technology
         <span class="caret"></span>
       </a>
       <div class="dropdown-menu" style="padding: 8px;">
-            <form method="POST" action="{{ url('admin-blog-categories-add') }}">
+            <form method="POST" action="{{ url('admin-projects-technologies-add') }}">
             <fieldset>
                 <div class="controls">
-                    <label class="control-label" for="title">Category name</label>
+                    <label class="control-label" for="title">Technology name</label>
                     <div class="input-append">
                         <input type="text" class="span2" id="title" name="title" /><input type="submit" class="btn btn-small">Add</submit>
                     </div>
@@ -58,18 +58,18 @@
 </script>
 
 <script type="text/javascript">
-function removeCategory(id) {
+function removeTechnology(id) {
   jQuery.ajax({
     url: "{{ url('admin-remove-entity') }}",
     data: {
-      item_type: "BlogCategory",
+      item_type: "Technology",
       item_id: id,
     },
     type: "POST",
     dataType: "json",
     success: function(data) {
       if (data.result == "ok")
-          $('#category-' + id).remove();
+          $('#technology-' + id).remove();
     }
   });
 }

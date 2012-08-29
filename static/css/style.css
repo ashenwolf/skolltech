@@ -203,7 +203,7 @@ body {
 	line-height: 3em;
 }
 
-#expertises span {
+#expertises a:link {
 	-moz-box-shadow: 0px 0px 2px 1px #ccc;
 	-webkit-box-shadow: 0px 0px 2px 1px #ccc;
 	box-shadow: 0px 0px 2px 1px #ccc;
@@ -216,6 +216,7 @@ body {
 	padding: 5px;
 	font-size: 2em/3em;
 	text-transform: uppercase;
+	text-decoration: none;
 }
 
 .syntaxhighlighter {

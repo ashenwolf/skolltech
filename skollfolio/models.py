@@ -7,7 +7,7 @@ from skollimages.models import ImageRecord
 
 
 class Technology(db.Model):
-    name = db.StringProperty(required=True)
+    title = db.StringProperty(required=True)
     slug = db.StringProperty(required=True)
 
     image_small = blobstore.BlobReferenceProperty()
@@ -36,7 +36,7 @@ class Project(db.Model):
 
     category = db.ReferenceProperty(ProjectCategory)
     tags = db.StringListProperty()
-    technologies = db.StringListProperty()
+    technologies = db.ListProperty(db.Key)
 
     date_created = db.DateTimeProperty(required=True, auto_now_add=True)
     is_published = db.BooleanProperty(required=True, default=True)

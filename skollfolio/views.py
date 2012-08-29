@@ -1,21 +1,27 @@
 from misc.decorators import render_to, BaseHandler 
-from models import PortfolioProject, ProjectCategory
+from models import PortfolioProject, ProjectCategory, Technology
 
 class index(BaseHandler):
     @render_to("projects/index.html", 0)
-    def get(self, category = None):
+    def get(self, category = None, technology = None):
+        cur_technology = cur_category = None
         categories = ProjectCategory.all()
-        if not category:
-            projects = PortfolioProject.all().order("-date_created")
-            cur_category = None
-        else:
+
+        if category:
             cur_category = ProjectCategory.all().filter("slug =", category).get()
             projects = PortfolioProject.all().filter("category =", cur_category).order("-date_created")
+        elif technology:
+            cur_technology = Technology.all().filter("slug =", technology).get()
+            projects = PortfolioProject.all().filter("technologies =", cur_technology.key()).order("-date_created")
+        else:
+            projects = PortfolioProject.all().order("-date_created")
+            cur_category = None
 
         return {
             "section": "portfolio",
             "projects": projects,
             "cur_category": cur_category,
+            "cur_technology": cur_technology,
             "categories": categories,
         }
 

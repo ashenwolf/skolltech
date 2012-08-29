@@ -67,6 +67,13 @@
 				</div>
 			</div>
 
+			<div class="control-group {% if form.technologies.errors %}error{% endif %}">
+				{{ form.technologies.label(class="control-label") }}
+				<div class="controls">
+					{{ form.technologies(class="input-xlarge span7", rows="5") }}
+				</div>
+			</div>
+
 			<div class="control-group {% if form.is_featured.errors %}error{% endif %}">
 				{{ form.is_featured.label(class="control-label") }}
 				<div class="controls">

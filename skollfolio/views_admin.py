@@ -8,7 +8,7 @@ from google.appengine.api import images
 from misc.decorators import render_to, admin_required, login_required, BaseHandler 
 from skollimages.models import ImageRecord
 
-from models import PortfolioProject, ProjectCategory
+from models import PortfolioProject, ProjectCategory, Technology
 from forms import PortfolioProjectForm, HomeProjectForm, ProjectCategoryForm, TechnologyForm
 
 class portfolio(BaseHandler):
@@ -28,6 +28,7 @@ class add(BaseHandler):
     @render_to("admin/projects/edit.html", 0)
     def get(self):
         form = PortfolioProjectForm()
+        form.technologies.choices = [(tech.key().id(), tech.title) for tech in Technology.all().fetch(None)]
 
         return {
             "admin_section": "admin-projects-new",
@@ -38,6 +39,7 @@ class add(BaseHandler):
     @login_required
     def post(self):
         form = PortfolioProjectForm(self.request.POST)
+        form.technologies.choices = [(tech.key().id(), tech.title) for tech in Technology.all().fetch(None)]
 
         if form.validate():
             project = PortfolioProject(**form.data)
@@ -56,6 +58,7 @@ class edit(BaseHandler):
     def get(self, project_id, extra=""):
         project = PortfolioProject.get_by_id(long(project_id))
         form = PortfolioProjectForm(obj = project)
+        form.technologies.choices = [(tech.key().id(), tech.title) for tech in Technology.all().fetch(None)]
 
         return {
             "admin_section": "admin-projects-portfolio",
@@ -70,6 +73,7 @@ class edit(BaseHandler):
     def post(self, project_id, extra=""):
         project = PortfolioProject.get_by_id(long(project_id))
         form = PortfolioProjectForm(self.request.POST)
+        form.technologies.choices = [(tech.key().id(), tech.title) for tech in Technology.all().fetch(None)]
         success = False
 
         if form.validate():
@@ -158,44 +162,46 @@ class categories_edit(BaseHandler):
 
 class technologies(BaseHandler):
     @admin_required
-    @render_to("admin/projects/categories.html", 0)
+    @render_to("admin/projects/technologies.html", 0)
     def get(self):
-        categories = ProjectCategory.all()
+        technologies = Technology.all()
 
         return {
-            "admin_section": "admin-projects-categories",
-            "categories": categories,
+            "admin_section": "admin-projects-technologies",
+            "technologies": technologies,
         }
 
 
 class technologies_add(BaseHandler):
     @admin_required
     def post(self):
-        form = ProjectCategoryForm(self.request.POST)
+        form = TechnologyForm(self.request.POST)
 
         if form.validate():
             title = form.data["title"]
-            slug = title.lower().replace(" ", "-")
-            category = ProjectCategory(title = title, slug = slug)
-            category.put()
+            slug = title.strip().lower().replace(" ", "-")
+            technology = Technology(title = title, slug = slug)
+            technology.put()
+        else:
+            print form.errors
 
-        self.redirect_to('admin-projects-categories')
+        self.redirect_to('admin-projects-technologies')
 
 class technologies_edit(BaseHandler):
     @admin_required
-    def post(self, category_id):
-        form = ProjectCategoryForm(self.request.POST)
+    def post(self, technology_id):
+        form = TechnologyForm(self.request.POST)
 
         if form.validate():
-            slug = form.data["title"].lower().replace(" ", "-")
-            category = ProjectCategory.get(long(category_id))
-            form.populate_obj(category)
-            category.put()
+            slug = form.data["title"].strip().lower().replace(" ", "-")
+            technology = Technology.get(long(category_id))
+            form.populate_obj(technology)
+            technology.put()
 
         return {
             "result": {
-               "id": category.key().id(),
-               "title": category.title,
-               "slug": category.slug,
+               "id": technology.key().id(),
+               "title": technology.title,
+               "slug": technology.slug,
            }
         }

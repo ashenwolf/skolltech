@@ -15,3 +15,15 @@ indexes:
   - name: category
   - name: date_created
     direction: desc
+
+- kind: PortfolioProject
+  properties:
+  - name: technologies
+  - name: date_created
+    direction: desc
+
+- kind: PortfolioProject
+  properties:
+  - name: technology
+  - name: date_created
+    direction: desc

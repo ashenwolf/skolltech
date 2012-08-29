@@ -149,21 +149,9 @@
 			<!--<hr />-->
 			<div style="text-align: center; padding: 0 20px;">
 			<div style="margin: 0 auto; overflow: visible;" id="expertises">
-				<span>PHP</span>
-				<span>CSS</span>
-				<span>Ruby on Rails</span>
-				<span>Python</span>
-				<span>Google App Engine</span>
-				<span>Django</span>
-				<span>Pylons</span>
-				<span>Wordpress</span>
-				<span>OpenCart</span>
-				<span>Drupal</span>
-				<span>C++</span>
-				<span>C#</span>
-				<span>Android</span>
-				<span>iOS</span>
-				<span>Objective C</span>
+				{% for tech in technologies %}
+				<a href="{{ url('portfolio-index-technology', technology = tech.slug) }}">{{ tech }}</a></span>
+				{% endfor %}
 			</div>
 			</div>
 		</div>

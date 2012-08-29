@@ -7,7 +7,8 @@ import views_admin
 routes = [
     Route('/', 							views.index,		'portfolio-index'),
     Route('/<project_id:\d+>/', 		views.project, 		'portfolio-project'),
-    Route('/<category:[a-z\-\.]+>/',     views.index,        'portfolio-index-category'),
+    Route('/category/<category:[a-z\-\.]+>/',           views.index,        'portfolio-index-category'),
+    Route('/technology/<technology:[a-z\-\.]+>/',       views.index,        'portfolio-index-technology'),
 #    Route('/add/', 						views.add,			'portfolio-article-add'),
 #    Route('/<article_id:\d+>/edit/', 	views.edit, 		'portfolio-article-edit'),
 #    Route('/<article_id:\d+>/edit/', 	views.remove, 		'portfolio-article-remove'),
@@ -27,5 +28,5 @@ adminRoutes = [
 
     Route('/projects/technologies/',                            views_admin.technologies,           'admin-projects-technologies'),
     Route('/projects/technologies/add/',                        views_admin.technologies_add,       'admin-projects-technologies-add'),
-    Route('/projects/technologies/<technology_id:\d+>/edit/',   views_admin.technologies_edit,     'admin-projects-technologies-edit'),
+    Route('/projects/technologies/<technology_id:\d+>/edit/',   views_admin.technologies_edit,      'admin-projects-technologies-edit'),
 ]

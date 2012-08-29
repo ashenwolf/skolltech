@@ -1,5 +1,5 @@
 from misc.decorators import render_to, BaseHandler 
-from skollfolio.models import PortfolioProject
+from skollfolio.models import PortfolioProject, Technology
 from skollblog.models import BlogPost
 from skolladmin.models import StaticPage
 
@@ -8,11 +8,13 @@ class home(BaseHandler):
     def get(self):
         featured = PortfolioProject.all().filter("is_featured =", True).fetch(None)
         projects = PortfolioProject.all().order("-date_created").fetch(4)
+        technologies = Technology.all().fetch(None)
         posts = BlogPost.all().order("-date_created").fetch(2)
 
         return {
             "featured": featured,
             "projects": projects,
+            "technologies": technologies,
             "posts": posts,
         }
 
