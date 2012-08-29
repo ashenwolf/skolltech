@@ -2,7 +2,13 @@
 
 {% block title %}{{ project.title }} - {% trans %}Project{% endtrans %} - {% endblock %}
 
+{% block css %}
+	<link href="/static/photoswipe/photoswipe.css" type="text/css" rel="stylesheet" />
+{% endblock %}
+
 {% block javascript %}
+	<script type="text/javascript" src="/static/photoswipe/klass.min.js"></script>
+	<script type="text/javascript" src="/static/photoswipe/code.photoswipe.jquery-3.0.5.min.js"></script>
 
 	<script type="text/javascript" src="/static/js/jquery.easing-1.3.js"></script>
 	<script type="text/javascript" src="/static/js/jquery.iosslider.js"></script>
@@ -22,6 +28,9 @@
 			});
 
 			$('.iosSlider').iosSlider('update');
+
+			var options = {};
+			$("#gallery a").photoSwipe(options);
 		});
 	</script>
 
@@ -73,7 +82,7 @@
 					<!-- slider container -->
 					<div class='iosSlider' style="">
 						<!-- slider -->
-						<ul class='thumbnails slider' style="padding-left: 0;">
+						<ul class='thumbnails slider' style="padding-left: 0;" id="gallery">
 							<!-- slides -->
 							{% for image in project.imagerecord_set %}
 							<li class="span3">
