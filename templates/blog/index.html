@@ -15,15 +15,19 @@
 			{% for post in posts %}
 			<div class="row">
 				<div class="span3">
+					{% if post.imagerecord_set %}
+					<a href="{{ url('blog-post', post_id = post.key().id()) }}"><img src="{{ (post.imagerecord_set | first).image | serve_image(320, False) }}" alt="{{ post.title }}" /></a>
+					{% else %}
 					<img src="http://placehold.it/320x240" alt="{{ post.title }}" />
+					{% endif %}
 					<p>{{ post.date_created }}</p>
 				</div>
 				<div class="span6">
-					<h2><a href="{{ post.key().id() }}/">{{ post.title }}</a></h2>
+					<h2><a href="{{ url('blog-post', post_id = post.key().id()) }}">{{ post.title }}</a></h2>
 
 					<div>
 						{% if post.teaser %}{{ post.teaser }}
-						{% else %}{{ post.content }}{% endif %}
+						{% else %}{{ post.content | truncate(512) | htmlify }}{% endif %}
 					</div>
 				</div>
 			</div>

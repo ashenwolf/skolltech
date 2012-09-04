@@ -18,3 +18,6 @@ def serve_image(key, size, crop):
 
 def upload_url(url):
 	return blobstore.create_upload_url(url)
+
+def htmlify(text):
+	return "<p>%s</p>" % text.replace("\n\n", "</p><p>").replace("\n", "<br />")

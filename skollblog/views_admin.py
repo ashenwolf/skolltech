@@ -68,9 +68,9 @@ class edit(BaseHandler):
     def post(self, post_id, extra=""):
         form = BlogPostForm(self.request.POST)
         success = False
+        post = BlogPost.get_by_id(long(post_id))
 
         if form.validate():
-            post = BlogPost.get_by_id(long(post_id))
             form.populate_obj(post)
             post.save()
             success = True
@@ -122,10 +122,10 @@ class categories_edit(BaseHandler):
     @admin_required
     def post(self, category_id):
         form = BlogCategoryForm(self.request.POST)
+        category = BlogCategory.get(long(category_id))
 
         if form.validate():
             slug = form.data["title"].lower().replace(" ", "-")
-            category = BlogCategory.get(long(category_id))
             form.populate_obj(category)
             category.put()
 

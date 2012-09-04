@@ -53,6 +53,7 @@ config = {
         'filters': {
             'serve_image': misc.filters.serve_image,
             'upload_url': misc.filters.upload_url,
+            'htmlify': misc.filters.htmlify,
             },
 	    'globals': {
             'url': webapp2.uri_for,
