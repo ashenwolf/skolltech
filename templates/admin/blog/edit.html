@@ -111,6 +111,62 @@
 		{% endif %}
 		</div>
 	</div>
+
+	<div class="modal hide fade" id="galleryModal">
+	  <div class="modal-header">
+	    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	    <h3>Image gallery</h3>
+	  </div>
+	  <div class="modal-body">
+	    <div class="accordion" id="imageAccordion">
+	  	{% for image in post.imagerecord_set %}
+	  		<div class="accordion-group">
+	  			<div class="accordion-heading">
+	  				<a href="#collapse{{ image.key().id() }}" class="accordion-toggle" data-toggle="collapse" data-parent="#imageAccordion">
+	  					<img src="{{ image.image | serve_image(75, True) }}" alt="{{ image.title }}">
+	  				</a>
+	  			</div>
+	  			<div id="collapse{{ image.key().id() }}" class="accordion-body collapse">
+	  				<div class="accordion-inner">
+	  					<div style="float: left; width: 200px;">
+		  					<img src="{{ image.image | serve_image(180, True) }}" alt="{{ image.title }}" class="img-polaroid" />
+	  					</div>
+	  					<div style="margin-left: 205px;">
+	  						<a name="collapse{{ image.key().id() }}"></a>
+	  						<strong>Title/alt text</strong>
+	  						<input type="text" id="image-alt-{{ image.key().id() }}" style="width: 98%;">{{ image.title }}</input>
+
+	  						<strong>Align</strong>
+							<div class="btn-group" id="group-align-{{ image.key().id() }}" data-toggle="buttons-radio">
+							  <button class="btn btn-small active" data-align="none">None</button>
+							  <button class="btn btn-small" data-align="left">Left</button>
+							  <button class="btn btn-small" data-align="center">Middle</button>
+							  <button class="btn btn-small" data-align="right">Right</button>
+							</div>
+
+	  						<br>
+	  						<strong>Size</strong>
+							<div class="btn-group" id="group-size-{{ image.key().id() }}" data-toggle="buttons-radio">
+							  <button class="btn btn-small" data-size="q">Square</button>
+							  <button class="btn btn-small" data-size="s">Small</button>
+							  <button class="btn btn-small active" data-size="m">Medium</button>
+							  <button class="btn btn-small" data-size="l">Large</button>
+							  <button class="btn btn-small" data-size="o">Original</button>
+							</div>
+	    					<br />
+	    					<button onClick="insertImage({{ image.key().id() }}, '{{ image.image | serve_image(None, False) }}')" class="btn btn-primary pull-right">Insert image</button>
+	    					<br class="clearfix" /><br />
+	  					</div>
+	  				</div>
+	  			</div>
+	  		</div>
+	    {% endfor %}
+	    </div>
+	  </div>
+	  <div class="modal-footer">
+	    <button class="btn" data-dismiss="modal">Close</button>
+	  </div>
+	</div>	
 {% endblock %}
 
 {% block javascript %}
@@ -160,12 +216,31 @@ function removeImage(id) {
 		}
 	});
 }
+
+
+function insertImage(id, url) {
+	var sizeMap = {
+		"q": "=s100-c",
+		"s": "=s160",
+		"m": "=s640",
+		"l": "=s1024",
+		"o": "",
+	};
+
+	var align = $("#group-align-" + id + " button.active").data("align");
+	var size = $("#group-size-" + id + " button.active").data("size");
+
+	var image = [
+		'<img src="' + url + sizeMap[size] + '" alt="' + $("#image-alt-" + id).val() + '" style="float: '+ align +';" /> '
+	];
+	$.markItUp({ replaceWith: image.join('') });
+}
 </script>
 {% endif %}
 <!-- markItUp! -->
 <script type="text/javascript" src="/static/markitup/jquery.markitup.js"></script>
 <!-- markItUp! toolbar settings -->
-<script type="text/javascript" src="/static/markitup/sets/default/set.js"></script>
+<script type="text/javascript" src="/static/markitup/sets/skoll/set.js"></script>
 
 <script type="text/javascript" >
    $(document).ready(function() {
