@@ -171,26 +171,33 @@
 	  			<div id="collapse{{ image.key().id() }}" class="accordion-body collapse">
 	  				<div class="accordion-inner">
 	  					<div style="float: left; width: 200px;">
-		  					<img src="{{ image.image | serve_image(180, True) }}" alt="{{ image.title }}" />
+		  					<img src="{{ image.image | serve_image(180, True) }}" alt="{{ image.title }}" class="img-polaroid" />
 	  					</div>
 	  					<div style="margin-left: 205px;">
-	  						<label>Title/alt text</label>
-	  						<input type="text" style="width: 98%;"></input>
+	  						<a name="collapse{{ image.key().id() }}"></a>
+	  						<strong>Title/alt text</strong>
+	  						<input type="text" id="image-alt-{{ image.key().id() }}" style="width: 98%;">{{ image.title }}</input>
 
 	  						<strong>Align</strong>
-	  						<label class="radio"><input type="radio" name="groupAlign" value="none" checked> None</label>
-	  						<label class="radio"><input type="radio" name="groupAlign" value="left"> Left</label>
-	  						<label class="radio"><input type="radio" name="groupAlign" value="center"> Center</label>
-	  						<label class="radio"><input type="radio" name="groupAlign" value="right"> Right</label>
+							<div class="btn-group" id="group-align-{{ image.key().id() }}" data-toggle="buttons-radio">
+							  <button class="btn btn-small active" data-align="none">None</button>
+							  <button class="btn btn-small" data-align="left">Left</button>
+							  <button class="btn btn-small" data-align="center">Middle</button>
+							  <button class="btn btn-small" data-align="right">Right</button>
+							</div>
+
 	  						<br>
 	  						<strong>Size</strong>
-	  						<label class="radio"><input type="radio" name="groupImageSize" value="q"> Square</label>
-	  						<label class="radio"><input type="radio" name="groupImageSize" value="s"> Small</label>
-	  						<label class="radio"><input type="radio" name="groupImageSize" value="m" checked> Medium</label>
-	  						<label class="radio"><input type="radio" name="groupImageSize" value="l"> Large</label>
-	  						<label class="radio"><input type="radio" name="groupImageSize" value="o"> Original</label>
-	  						<hr>
-	    					<button onClick="insertImage('{{ image.image | serve_image(600, False) }}', '')" class="btn btn-primary pull-right">Insert image</button><br />
+							<div class="btn-group" id="group-size-{{ image.key().id() }}" data-toggle="buttons-radio">
+							  <button class="btn btn-small" data-size="q">Square</button>
+							  <button class="btn btn-small" data-size="s">Small</button>
+							  <button class="btn btn-small active" data-size="m">Medium</button>
+							  <button class="btn btn-small" data-size="l">Large</button>
+							  <button class="btn btn-small" data-size="o">Original</button>
+							</div>
+	    					<br />
+	    					<button onClick="insertImage({{ image.key().id() }}, '{{ image.image | serve_image(None, False) }}')" class="btn btn-primary pull-right">Insert image</button>
+	    					<br class="clearfix" /><br />
 	  					</div>
 	  				</div>
 	  			</div>
@@ -269,11 +276,21 @@ function removeImage(id) {
 	});
 }
 
-function insertImage(url, alt) {
+function insertImage(id, url) {
+	var sizeMap = {
+		"q": "=s100-c",
+		"s": "=s160",
+		"m": "=s640",
+		"l": "=s1024",
+		"o": "",
+	};
+
+	var align = $("#group-align-" + id + " button.active").data("align");
+	var size = $("#group-size-" + id + " button.active").data("size");
+
 	var image = [
-		'<img src="' + url + '" alt="' + alt + '" />\n'
+		'<img src="' + url + sizeMap[size] + '" alt="' + $("#image-alt-" + id).val() + '" style="float: '+ align +';" /> '
 	];
-	$(".collapse").collapse();
 	$.markItUp({ replaceWith: image.join('') });
 }
 </script>
