@@ -5,7 +5,7 @@ from google.appengine.ext import blobstore
 from google.appengine.api import users
 from misc.decorators import render_to, admin_required, BaseHandler 
 from models import SiteSettings, StaticPage
-from forms import SiteSettingsForm, StaticPageForm
+from forms import SiteSettingsForm, SiteContactsForm, StaticPageForm
 
 class dashboard(BaseHandler):
     @admin_required
@@ -16,12 +16,40 @@ class dashboard(BaseHandler):
             "admin_section": "admin-dashboard",
         }
 
+class about(BaseHandler):
+    @admin_required
+    @render_to("admin/about.html", 0)
+    def get(self):
+        settings = dict([(setting.key().name(), setting.value) for setting in SiteSettings.all().fetch(None)])
+        form = SiteSettingsForm(**settings)
+
+        return {
+            "admin_section": "admin-about",
+            "form": form,
+        }
+
+    @admin_required
+    @render_to("admin/about.html", 0)
+    def post(self):
+        form = SiteSettingsForm(self.request.POST)
+        success = False
+
+        if form.validate():
+            SiteSettings.batch_set(form.data)
+            success = True
+
+        return {
+            "admin_section": "admin-about",
+            "success": success,
+            "form": form,
+        }
+
 class contacts(BaseHandler):
     @admin_required
     @render_to("admin/contacts.html", 0)
     def get(self):
         settings = dict([(setting.key().name(), setting.value) for setting in SiteSettings.all().fetch(None)])
-        form = SiteSettingsForm(**settings)
+        form = SiteContactsForm(**settings)
 
         return {
             "admin_section": "admin-contacts",
@@ -31,7 +59,7 @@ class contacts(BaseHandler):
     @admin_required
     @render_to("admin/contacts.html", 0)
     def post(self):
-        form = SiteSettingsForm(self.request.POST)
+        form = SiteContactsForm(self.request.POST)
         success = False
 
         if form.validate():

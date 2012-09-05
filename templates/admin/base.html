@@ -21,7 +21,7 @@
 				    <a href="{{ url('admin-dashboard') }}">{% trans %}Site settings{% endtrans %}</a>
 				  </li>
 				  <li class="{% if admin_section == "admin-about" %}active{% endif %}">
-				    <a href="#">About us</a>
+				    <a href="{{ url('admin-about') }}">About us</a>
 				  </li>
 				  <li class="{% if admin_section == "admin-contacts" %}active{% endif %}">
 				    <a href="{{ url('admin-contacts') }}">Contacts</a>

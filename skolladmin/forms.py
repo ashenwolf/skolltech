@@ -8,11 +8,15 @@ from models import StaticPage
 
 
 class SiteSettingsForm(Form):
-    about_us_short = TextAreaField(u'About Us Short', [validators.optional(), validators.length(max=512)])
+	#about us
+    about_us = TextAreaField(u'About Us', [validators.optional(), validators.length(max=512)])
 
-    work_with_us_short = TextAreaField(u'Work With Us Short', [validators.optional(), validators.length(max=512)])
-    work_with_us_page = TextAreaField(u'Work With Us', [validators.optional()])
+    what_we_do = TextAreaField(u'What We Do', [validators.optional(), validators.length(max=512)])
+    work_with_us = TextAreaField(u'Work With Us', [validators.optional(), validators.length(max=512)])
+    hire_us = TextAreaField(u'Hire Us', [validators.optional(), validators.length(max=512)])
 
+class SiteContactsForm(Form):
+    # contacts
     address = TextAreaField(u'Address', [validators.optional()])
 
     our_facebook = TextField(u'Facebook', [validators.optional()])

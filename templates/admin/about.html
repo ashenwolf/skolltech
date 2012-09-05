@@ -1,0 +1,83 @@
+{% extends 'admin/base.html' %}
+
+{% block css %}
+	<link rel="stylesheet" type="text/css" href="/static/css/jquery.fileupload-ui.css">
+	<!-- markItUp! skin -->
+	<link rel="stylesheet" type="text/css" href="/static/markitup/skins/markitup/style.css" />
+	<!--  markItUp! toolbar skin -->
+	<link rel="stylesheet" type="text/css" href="/static/markitup/sets/default/style.css" />
+
+{% endblock %}
+
+{% block adminarea %}
+	<h2>{% trans %}About Us settings{% endtrans %}</h2>
+
+	{% if form.errors %}
+	    <div class="errors alert">
+	    	<h4 class="alert-heading">Please correct the following errors!</h4><br />
+	        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+	            {% for error in field_errors %}
+	                <p><strong>{{ form[field_name].label.text }}</strong>: {{ error }}</p>
+	            {% endfor %}
+	        {% endfor %}
+	    </div>
+	{% endif %}
+
+	{% if success %}
+	    <div class="alert-success alert">
+	    	<a class="close" data-dismiss="alert" href="#">×</a>
+	    	<h4 class="alert-heading">Post saved!</h4>
+	    </div>
+	{% endif %}
+
+	<form class="form-horizontal" method="POST" action=".">
+		<fieldset>
+			<div class="control-group {% if form.about_us.errors %}error{% endif %}">
+				{{ form.about_us.label(class="control-label") }}
+				<div class="controls">
+					{{ form.about_us(class="markitup input-xlarge span7") }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.what_we_do.errors %}error{% endif %}">
+				{{ form.what_we_do.label(class="control-label") }}
+				<div class="controls">
+					{{ form.what_we_do(class="markitup input-xlarge span7") }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.work_with_us.errors %}error{% endif %}">
+				{{ form.work_with_us.label(class="control-label") }}
+				<div class="controls">
+					{{ form.work_with_us(class="markitup input-xlarge span7") }}
+				</div>
+			</div>
+
+			<div class="control-group {% if form.hire_us.errors %}error{% endif %}">
+				{{ form.hire_us.label(class="control-label") }}
+				<div class="controls">
+					{{ form.hire_us(class="markitup input-xlarge span7") }}
+				</div>
+			</div>
+		</fieldset>
+	</form>
+
+	<div class="form-actions" style="margin-left: 160px;">
+		<div>
+		<a href="#" onclick="document.forms[0].submit();return false;" class="btn btn-primary"><i class="icon-ok-sign icon-white"></i> {% trans %}Save settings{% endtrans %}</a>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascript %}
+<!-- markItUp! -->
+<script type="text/javascript" src="/static/markitup/jquery.markitup.js"></script>
+<!-- markItUp! toolbar settings -->
+<script type="text/javascript" src="/static/markitup/sets/default/set.js"></script>
+
+<script type="text/javascript" >
+   $(document).ready(function() {
+      $(".markitup").markItUp(mySettings);
+   });
+</script>
+{% endblock %}

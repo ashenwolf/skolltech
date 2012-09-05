@@ -10,8 +10,8 @@
 				<h1>{% trans %}Our expertise in{% endtrans %} {{ cur_technology }}</h1>
 				<br />
 			{% else %}
-				<h1>{% trans %}Our portfolio{% endtrans %}</h1>
-
+			{% if is_admin %}<h1>&nbsp;</h1>{% endif %}
+<!--				<h1>{% trans %}Our portfolio{% endtrans %}</h1>-->
 				<div class="navbar">
 				  <div class="navbar-inner">
 				  	<div class="container">

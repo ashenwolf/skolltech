@@ -6,28 +6,38 @@
 	<div class="row">
 		<div class="span12">
 			{% if is_admin %}<a href="{{ url('admin-blog-post-add') }}" class="btn btn-large" style="float: right;"><i class="icon-plus"></i> New post</a>{% endif %}
-			<h1>{% trans %}Blog{% endtrans %}</h1><br /><br />
+<!--			<h1>{% trans %}Blog{% endtrans %}</h1><br /><br />-->
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row" style="margin-top: 20px;">
 		<div class="span9">
 			{% for post in posts %}
-			<div class="row">
+			<div class="row" style="margin-bottom: 32px;">
 				<div class="span3">
 					{% if post.imagerecord_set %}
 					<a href="{{ url('blog-post', post_id = post.key().id()) }}"><img src="{{ (post.imagerecord_set | first).image | serve_image(320, False) }}" alt="{{ post.title }}" /></a>
 					{% else %}
 					<img src="http://placehold.it/320x240" alt="{{ post.title }}" />
 					{% endif %}
-					<p>{{ post.date_created }}</p>
 				</div>
 				<div class="span6">
 					<h2><a href="{{ url('blog-post', post_id = post.key().id()) }}">{{ post.title }}</a></h2>
+					<div class="row" style="font-size: small; margin-top: -5px; color: #333;">
+						<div class="span4">{{ post.date_created | datetime }} by Author</div>
+						<div class="span2"><i class="icon-comment"></i> 0 comments</div>
+					</div>
 
-					<div>
+					<div style="margin-top: 24px;">
 						{% if post.teaser %}{{ post.teaser }}
 						{% else %}{{ post.content | truncate(512) | htmlify }}{% endif %}
+					</div>
+
+					<div style="font-size: small;">
+					<hr style="color: #666; background-color: #666; height: 1px;" />
+					Tags: <a href="#">gae</a>, <a href="#">python</a><br />
+					Category: <a href="#">Knowledge sharing</a>
+					<hr style="color: #666; background-color: #666; height: 1px;" />
 					</div>
 				</div>
 			</div>

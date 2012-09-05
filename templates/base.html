@@ -20,12 +20,12 @@
 <div style="overflow: hidden;">
 	<div id="page-body" class="container">
 		<div id="page-header" class="row" style="padding: 15px 0 30px 0;">
-			<div class="span4"><a href="/"><img src="/static/images/skoll-tech-logo4.png" alt="Skoll Technologies" /></a></div>
-			<div class="span8"><p style="text-align: right; padding-top: 10px;">
+			<div class="span5"><a href="/"><img src="/static/images/skoll-tech-logo4.png" alt="Skoll Technologies" /></a></div>
+			<div class="span7"><p style="text-align: right; padding-top: 10px;">
 				<a href="/" class="btn btn-large {% if section %}noback{% endif %}">Hello!</a> &nbsp;
 				<a href="{{ url('staticpage', page_slug = 'about') }}" class="btn btn-large {% if section != "about" %}noback{% endif %}">About Us</a> &nbsp;
 				<a href="{{ url('portfolio-index') }}" class="btn btn-large {% if section != "portfolio" %}noback{% endif %}">Our Portfolio</a> &nbsp;
-				<a href="{{ url('blog-index') }}" class="btn btn-large {% if section != "blog" %}noback{% endif %}">Our notes</a> &nbsp;
+				<a href="{{ url('blog-index') }}" class="btn btn-large {% if section != "blog" %}noback{% endif %}">Our Blog</a> &nbsp;
 				<a href="{{ url('staticpage', page_slug = 'contact') }}" class="btn btn-large {% if section != "contacts" %}noback{% endif %}">Contact Us</a> &nbsp;
 				<!--<a href="/projects/" class="btn btn-large {% if section != "projects" %}noback{% endif %}">Our Projects</a> &nbsp;-->
 			</p>
@@ -40,11 +40,11 @@
 				<div class="row">
 					<div class="span9">
 						<h4 style="color: #aaa; text-shadow: #222 1px 1px;">Hire Us</h3>
-						<p style="color: #aaa;">Why should you hire us?</p>
+						<p style="color: #aaa;">{{ settings.get('hire_us') }}</p>
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row" style="margin-top: 32px;">
 					<div class="span3">
 						<h4 style="color: #aaa; text-shadow: #222 1px 1px;">Our Address</h4>
 						<small style="color: #aaa;">{{ settings.get('address') }}</small>

@@ -6,6 +6,7 @@ import views
 routes = [
 	# site settings
     Route(r'/', 					views.dashboard,			'admin-dashboard'),
+    Route(r'/about/',               views.about,                'admin-about'),
     Route(r'/contacts/', 			views.contacts,				'admin-contacts'),
 
     # static pages

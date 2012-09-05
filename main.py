@@ -54,6 +54,7 @@ config = {
             'serve_image': misc.filters.serve_image,
             'upload_url': misc.filters.upload_url,
             'htmlify': misc.filters.htmlify,
+            'datetime': misc.filters.format_datetime,
             },
 	    'globals': {
             'url': webapp2.uri_for,
