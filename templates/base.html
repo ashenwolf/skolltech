@@ -52,21 +52,21 @@
 					<div class="span3">
 						<h3>{% trans %}Contact Us{% endtrans %}</h3>
 						<p>Phone: +38 (091) 309 52 89<br />
-						   E-Mail: <a href="#">contact@skoll.com.ua</a><br />
+						   E-Mail: <a href="mailto:contact@skoll.com.ua">contact@skoll.com.ua</a><br />
 						   Skype: graywolfua</p>
 					</div>
 					<div class="span3">
 						<h3>{% trans %}Stay in Touch{% endtrans %}</h3>
-						<p>{% if settings.get('our_facebook') %}<a href="{{ settings.get('our_facebook') }}"><img src="/static/images/icons/facebook.png"></a>{% endif %}
-						   {% if settings.get('our_googleplus') %}<a href="{{ settings.get('our_googleplus') }}"><img src="/static/images/icons/googleplusalt.png"></a>{% endif %}
-						   {% if settings.get('our_twitter') %}<a href="{{ settings.get('our_twitter') }}"><img src="/static/images/icons/twitter2.png"></a>{% endif %}
-						   {% if settings.get('our_linkedin') %}<a href="{{ settings.get('our_linkedin') }}"><img src="/static/images/icons/linkedin.png"></a>{% endif %}
-						   <a href="/feed/"><img src="/static/images/icons/rss.png"></a>
+						<p>{% if settings.get('our_facebook') %}<a href="{{ settings.get('our_facebook') }}"><img src="/static/images/icons/facebook.png" rel="me" alt="Facebook"></a>{% endif %}
+						   {% if settings.get('our_googleplus') %}<a href="{{ settings.get('our_googleplus') }}"><img src="/static/images/icons/googleplusalt.png" rel="me" alt="Google+"></a>{% endif %}
+						   {% if settings.get('our_twitter') %}<a href="{{ settings.get('our_twitter') }}"><img src="/static/images/icons/twitter2.png" rel="me" alt="Twitter"></a>{% endif %}
+						   {% if settings.get('our_linkedin') %}<a href="{{ settings.get('our_linkedin') }}"><img src="/static/images/icons/linkedin.png" rel="me" alt="LinkedIn"></a>{% endif %}
+						   <a href="/feed/"><img src="/static/images/icons/rss.png" alt="RSS Feed"></a>
 						</p>
 					</div>
 					<div class="span3">
 						<p style="margin-top: 5px;">Copyright &copy; 2011-2012 Skoll Technologies.<br/>
-									    All rights reserved.</p>
+						All rights reserved.</p>
 					</div>
 				</div>
 			</div>
