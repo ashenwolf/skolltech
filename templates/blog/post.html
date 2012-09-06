@@ -20,38 +20,40 @@
 {% endblock %}
 
 {% block content %}
-<!--	<div class="row">
-		<div class="span12">
-		</div>
-	</div>-->
-
 	<div class="row">
 		<div class="span9" class="blogpost">
-<!--			<div style="padding: 15px; background: #fff; border-radius: 5px;">-->
 			<h1>{{ post.title }}</h1><br>
+<!--			<div style="margin-top: -18px;">by <a href="#">Sergii Gulenok</a></div>-->
+			<hr style="margin-top: -10px; color: #666; background-color: #666; height: 1px;" />
+			<div class="row" style="font-size: small; margin-top: -5px; color: #333;">
+				<div class="span2"><i class="icon-user"></i> <a href="#">Sergii Gulenok</a></div>
+				<div class="span2"><i class="icon-time"></i> {{ post.date_created | datetime }}</div>
+				<div class="span2"><i class="icon-bookmark"></i> <a href="{{ url('blog-index-category', category = post.category.slug) }}">{{ post.category.title }}</a></div>
+				<div class="span2"><i class="icon-comment"></i> 0 comments</div>
+			</div>
 
-			<p>{{ post.date_created }}</p>
-
-				<div>
-					{{ post.content | htmlify }}
-				</div>
+			<div style="margin-top: 32px;">
+				{{ post.content | htmlify }}
+			</div>
 				
 			<div>
 			</div>
 			
-			<hr class="clearfix" />
+			<hr class="crearfix" style="color: #666; background-color: #666; height: 1px;" />
 			<div class="row">
-				<div class="span7"><p>Tags: 
+				<div class="span7">
+					{% if post.tags %}<p><i class="icon-tag"></i> 
 					{% for tag in post.tags %}
 						<a href="#">{{ tag }}</a>{% if not loop.last %}, {% endif %}
 					{% endfor %}</p>
+					{% endif %}
 				</div>
 				<div class="span2">
 					{% if is_admin %}<a href="{{ url('admin-blog-post-edit', post_id = post.key().id()) }}" class="btn pull-right"><i class="icon-edit"></i> Edit</a>{% endif %}
 				</div>
 			</div>
 
-			<hr class="clearfix" />
+			<hr class="crearfix" style="color: #666; background-color: #666; height: 1px;" />
 			<!-- START: Livefyre Embed -->
 			<script type='text/javascript' src='http://zor.livefyre.com/wjs/v1.0/javascripts/livefyre_init.js'></script>
 			<script type='text/javascript'>
