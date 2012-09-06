@@ -36,18 +36,6 @@
 
 @font-face {
     font-family: 'Open Sans';
-    src: url('fonts/OpenSans-Bold-webfont.eot');
-    src: url('fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/OpenSans-Bold-webfont.woff') format('woff'),
-         url('fonts/OpenSans-Bold-webfont.ttf') format('truetype'),
-         url('fonts/OpenSans-Bold-webfont.svg#OpenSansBold') format('svg');
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: normal;
-}
-
-@font-face {
-    font-family: 'Open Sans';
     src: url('fonts/OpenSans-BoldItalic-webfont.eot');
     src: url('fonts/OpenSans-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
          url('fonts/OpenSans-BoldItalic-webfont.woff') format('woff'),
@@ -58,6 +46,17 @@
     font-stretch: normal;
 }
 
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-Bold-webfont.eot');
+    src: url('fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/OpenSans-Bold-webfont.woff') format('woff'),
+         url('fonts/OpenSans-Bold-webfont.ttf') format('truetype'),
+         url('fonts/OpenSans-Bold-webfont.svg#OpenSansBold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+}
 
 @font-face {
     font-family: 'Open Sans';
@@ -285,12 +284,12 @@ h4 {
 	
 }
 
-.thumb-front, .thumb-project {
+.thumb-front, .thumb-project, .thumb-info {
+	position: relative;
 	background: #fff;
-	min-height: 300px;
 	color: #222;
 	cursor: pointer;
-	padding: 10px;
+	padding: 0px 10px 32px 10px;
 }
 
 .thumb-front {
@@ -301,9 +300,31 @@ h4 {
 	min-height: 400px;
 }
 
-.thumb-front:hover, .thumb-project:hover {
+.thumb-front div, .thumb-project div {
+	margin-top: 10px;
+}
+
+.thumb-info {
+	min-height: 500px;
+	cursor: default;
+}
+
+.thumb-front:hover, .thumb-project:hover, .thumb-info:hover {
 	text-decoration: none;
 	color: #000;
+}
+
+.full-height {
+	min-height: 100%; /* real browsers */
+	height: auto !important; /* real browsers */
+	height: 100%; /* IE6: treated as min-height*/
+}
+
+.learn-more {
+	color: #08c;
+	text-decoration: underline;
+	position: absolute;
+	bottom: 5px;
 }
 
 #expertises {
@@ -351,6 +372,11 @@ h1, h2, h3, h4, h5 {
 	text-shadow: #fff 1px 1px;
 }
 
-#page-footer address {
+#page-footer, #page-footer p {
 	color: #aaa;
+	font-size: small;
+}
+
+#page-footer h1, #page-footer h2, #page-footer h3, #page-footer h4, #page-footer h5 {
+	text-shadow: #222 1px 1px;
 }

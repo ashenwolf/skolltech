@@ -39,35 +39,34 @@
 			<div class="span12">
 				<div class="row">
 					<div class="span9">
-						<h4 style="color: #aaa; text-shadow: #222 1px 1px;">Hire Us</h3>
-						<p style="color: #aaa;">{{ settings.get('hire_us') }}</p>
+						<h3>{% trans %}Hire Us{% endtrans %}</h3>
+						<p>{{ settings.get('hire_us') }}</p>
 					</div>
 				</div>
 
-				<div class="row" style="margin-top: 32px;">
+				<div class="row" style="margin-top: 21px;">
 					<div class="span3">
-						<h4 style="color: #aaa; text-shadow: #222 1px 1px;">Our Address</h4>
-						<small style="color: #aaa;">{{ settings.get('address') }}</small>
+						<h3>{% trans %}Our Address{% endtrans %}</h3>
+						<div>{{ settings.get('address') }}</div>
 					</div>
 					<div class="span3">
-						<h4 style="color: #aaa; text-shadow: #222 1px 1px;">Contact Us</h4>
-						<p style="color: #aaa;"><small>Phone: +38 (091)</sup> 3095289<br />
-							E-Mail: <a href="#">contact@skoll.com.ua</a><br />
-							Skype: graywolfua</small></p>
-						<br /><br />
+						<h3>{% trans %}Contact Us{% endtrans %}</h3>
+						<p>Phone: +38 (091) 309 52 89<br />
+						   E-Mail: <a href="#">contact@skoll.com.ua</a><br />
+						   Skype: graywolfua</p>
 					</div>
 					<div class="span3">
-						<h4 style="color: #aaa; text-shadow: #222 1px 1px;">Stay in Touch</h4>
-						<p style="color: #aaa; font-size: small;">
-							{% if settings.get('our_facebook') %}<a href="{{ settings.get('our_facebook') }}"><img src="/static/images/icons/facebook.png"></a>{% endif %}
-							{% if settings.get('our_googleplus') %}<a href="{{ settings.get('our_googleplus') }}"><img src="/static/images/icons/googleplusalt.png"></a>{% endif %}
-							{% if settings.get('our_twitter') %}<a href="{{ settings.get('our_twitter') }}"><img src="/static/images/icons/twitter2.png"></a>{% endif %}
-							{% if settings.get('our_linkedin') %}<a href="{{ settings.get('our_linkedin') }}"><img src="/static/images/icons/linkedin.png"></a>{% endif %}
-							<a href="/feed/"><img src="/static/images/icons/rss.png"></a>
+						<h3>{% trans %}Stay in Touch{% endtrans %}</h3>
+						<p>{% if settings.get('our_facebook') %}<a href="{{ settings.get('our_facebook') }}"><img src="/static/images/icons/facebook.png"></a>{% endif %}
+						   {% if settings.get('our_googleplus') %}<a href="{{ settings.get('our_googleplus') }}"><img src="/static/images/icons/googleplusalt.png"></a>{% endif %}
+						   {% if settings.get('our_twitter') %}<a href="{{ settings.get('our_twitter') }}"><img src="/static/images/icons/twitter2.png"></a>{% endif %}
+						   {% if settings.get('our_linkedin') %}<a href="{{ settings.get('our_linkedin') }}"><img src="/static/images/icons/linkedin.png"></a>{% endif %}
+						   <a href="/feed/"><img src="/static/images/icons/rss.png"></a>
 						</p>
 					</div>
 					<div class="span3">
-						<p style="color: #aaa; margin-top: 5px;"><small>Copyright &copy; 2011-2012 Skoll Technologies.<br/>All rights reserved.</small></p>
+						<p style="margin-top: 5px;">Copyright &copy; 2011-2012 Skoll Technologies.<br/>
+									    All rights reserved.</p>
 					</div>
 				</div>
 			</div>
