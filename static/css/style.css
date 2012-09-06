@@ -202,10 +202,14 @@ h4 {
     padding: 5px 2px 0 7px;
 }
 
-.iosSlider .slider .item .text1 span {
+.iosSlider .slider .item .text1 a {
 	color: #FFFFFF;
     font: 3.1em/1.5em Arial; /* Norican;*/
     padding: 0 8px;
+}
+
+.iosSlider .slider .item .text1 a {
+	text-decoration: none;
 }
 
 .iosSlider .slider .item .text2 {
@@ -274,7 +278,7 @@ h4 {
 		right: 5px;
 	}
 	
-	.iosSlider .slider .item .text1 span {
+	.iosSlider .slider .item .text1 a {
 		font-size: 180%;
 	    line-height: 46px;
 	}
