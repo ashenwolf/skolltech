@@ -17,9 +17,11 @@
 		$(document).ready(function() {
 			/* some custom settings */
 			$('.iosSlider').iosSlider({
-				desktopClickDrag: true,
+				desktopClickDrag: false,
 				//snapToChildren: true,
 				//navSlideSelector: '.sliderContainer .slideSelectors .item',
+				navPrevSelector: '#scroll-prev',
+				navNextSelector: '#scroll-next',
 				//onSlideComplete: slideComplete,
 				//onSliderLoaded: sliderLoaded,
 				//onSlideChange: slideChange,
@@ -75,17 +77,22 @@
 	</div>
 
 	<div class="row">
-		<div class="span12">
+		<div class="span1">
+			<div style="position: relative; width: 100%; height: 220px;">
+				<img id="scroll-next" src="/static/images/arrow-prev.png" style="position: absolute; right: 0px; top: 40%; cursor: pointer;" alt="Prev" />
+			</div>
+		</div>
+		<div class="span6">
 			<div style="position: relative; padding-top: 12px;">
 				<!--<div class="fabricBackground"></div>-->
-				<div class="sliderContainer" style="padding: 10px 0 10px 0; height: 300px;">
+				<div class="sliderContainer" style="padding: 10px 0 10px 0; height: 240px;">
 					<!-- slider container -->
 					<div class='iosSlider' style="">
 						<!-- slider -->
 						<ul class='thumbnails slider' style="padding-left: 0;" id="gallery">
 							<!-- slides -->
 							{% for image in project.imagerecord_set %}
-							<li class="span3">
+							<li class="span2">
 								<a class="thumbnail" href="{{ image.image | serve_image(800, False) }}" style="padding: 10px;"><img class="item" src="{{ image.image | serve_image(320, True) }}" style="max-height: 270px; float: none;" /></a>
 							</li>
 							{% endfor %}
@@ -98,6 +105,15 @@
 					</div>
 				</div>
 			</div>
+		</div>
+		<div class="span1">
+			<div style="position: relative; width: 100%; height: 220px;">
+				<img id="scroll-next" src="/static/images/arrow-next.png" style="position: absolute; left: 0px; top: 40%; cursor: pointer;" alt="Prev" />
+			</div>
+		</div>
+		<div class="span4">
+			<h4>Team</h4>
+			<p>{{ project.team }}</p>
 		</div>
 	</div>
 

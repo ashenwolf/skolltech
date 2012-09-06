@@ -84,21 +84,28 @@
 			<div class="control-group {% if form.problem.errors %}error{% endif %}">
 				{{ form.problem.label(class="control-label") }}
 				<div class="controls">
-					{{ form.problem(class="input-xlarge span7") }}
+					{{ form.problem(class="input-xlarge span7 markitup") }}
 				</div>
 			</div>
 			<div class="control-group {% if form.solution.errors %}error{% endif %}">
 				{{ form.solution.label(class="control-label") }}
 				<div class="controls">
-					{{ form.solution(class="input-xlarge span7") }}
+					{{ form.solution(class="input-xlarge span7 markitup") }}
 				</div>
 			</div>
 			<div class="control-group {% if form.customer.errors %}error{% endif %}">
 				{{ form.customer.label(class="control-label") }}
 				<div class="controls">
-					{{ form.customer(class="input-xlarge span7") }}
+					{{ form.customer(class="input-xlarge span7 markitup") }}
 				</div>
 			</div>
+			<div class="control-group {% if form.team.errors %}error{% endif %}">
+				{{ form.team.label(class="control-label") }}
+				<div class="controls">
+					{{ form.team(class="input-xlarge span7 markitup") }}
+				</div>
+			</div>
+
 			<div class="control-group {% if form.url.errors %}error{% endif %}">
 				{{ form.url.label(class="control-label") }}
 				<div class="controls">
@@ -109,7 +116,7 @@
 			<div class="control-group {% if form.description.errors %}error{% endif %}">
 				{{ form.description.label(class="control-label") }}
 				<div class="controls">
-					{{ form.description(class="input-xlarge span7") }}
+					{{ form.description(class="input-xlarge span7 markitup") }}
 				</div>
 			</div>
 			<br />
@@ -302,7 +309,7 @@ function insertImage(id, url) {
 
 <script type="text/javascript" >
    $(document).ready(function() {
-      $("#description").markItUp(mySettings);
+      $(".markitup").markItUp(mySettings);
    });
 </script>
 {% endblock %}

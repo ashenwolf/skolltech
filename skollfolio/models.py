@@ -37,9 +37,9 @@ class Project(db.Model):
     category = db.ReferenceProperty(ProjectCategory)
     tags = db.StringListProperty()
     technologies = db.ListProperty(db.Key)
-
     date_created = db.DateTimeProperty(required=True, auto_now_add=True)
     is_published = db.BooleanProperty(required=True, default=True)
+
 
     author = db.UserProperty(required=True, auto_current_user_add=True)
 
@@ -58,6 +58,8 @@ class PortfolioProject(Project):
     problem = db.TextProperty()
     solution = db.TextProperty()
     customer = db.TextProperty()
+
+    team = db.TextProperty()
 
     url = db.LinkProperty()
 
