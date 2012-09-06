@@ -63,30 +63,30 @@
 		</div>
 	</div>
 
-	<div class="row" style="position: relative; padding-top: 12px;">
+	<div class="row" style="position: relative;">
 		<div class="fabricBackground"></div>
-		<div class="span10 offset1 sliderContainer" style="padding: 20px 0 20px 0;">
-			<!-- slider container -->
-			<div class='iosSlider'>
-				<!-- slider -->
-				<div class='slider'>
-					<!-- slides -->
-					{% for project in featured %}
-					<div class='item'>
-						<div class = 'selectorShadow'></div>
-						<div class = 'text1'><span>{{ project.title }}</span></div>
-						<div class = 'text2'><span>{{ project.teaser }}</span></div>
-						<div style="max-height: 400px;">
-							<img src="{{ project.teaser_image()|serve_image(800, False) }}" style="width: 100%;" alt="Project: {{ project.title }}" />
+		<div class="span10 offset1 fluidHeight">
+			<div class="sliderContainer">
+				<!-- slider container -->
+				<div class='iosSlider'>
+					<!-- slider -->
+					<div class='slider'>
+						<!-- slides -->
+						{% for project in featured %}
+						<div class='item'>
+							<div class = 'selectorShadow'></div>
+							<div class = 'text1'><span>{{ project.title }}</span></div>
+							<div class = 'text2'><span>{{ project.teaser }}</span></div>
+							<div style="background: url({{ project.teaser_image()|serve_image(800, False) }}) no-repeat center left; background-size: 100%; height: 100%; max-height: 400px;">&nbsp;</div>
 						</div>
+						{% endfor %}
 					</div>
+				</div>
+				<div class = 'slideSelectors'>
+					{% for project in featured %}
+						<div class = 'item'></div>
 					{% endfor %}
 				</div>
-			</div>
-			<div class = 'slideSelectors'>
-				{% for project in featured %}
-					<div class = 'item'></div>
-				{% endfor %}
 			</div>
 		</div>
 	</div>
@@ -103,7 +103,7 @@
 	  	{% for project in projects %}
 		  <li class="span3">
 		    <a href="{{ url('portfolio-project', project_id = project.key().id()) }}" class="thumbnail thumb-front" style="position: relative;">
-		      <div style="background: url('{{ project.teaser_image()|serve_image(320, False) }}') no-repeat center left; background-size: 100%; width:100%; height: 120px;"></div><br>
+		      <div style="background: url('{{ project.teaser_image()|serve_image(320, False) }}') no-repeat center left; background-size: 100%; width: 100%; height: 120px;"></div><br>
 		      <h4>{{ project.title }}</h4>
 		      <p style="line-height: 1.5em;">{{ project.teaser }}</p>
 		      <p class="learn-more">Learn more &raquo;</p>
