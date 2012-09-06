@@ -87,7 +87,7 @@ body {
 	/*background: url(/static/images/bg_texture.jpg);*/
 	background: url(/static/images/container-bg-n.jpg);
 	font-family: "Open Sans", Arial, Helvetica, sans;
-        font-stretch: normal;
+    font-stretch: normal;
 }
 
 h1, h2, h3, h4, h5, h6 {

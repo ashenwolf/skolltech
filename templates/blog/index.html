@@ -49,7 +49,7 @@
 					<hr style="color: #666; background-color: #666; height: 1px;" />
 					<div class="row" style="font-size: small; margin-top: -5px; color: #333;">
 						<div class="span2"><i class="icon-time"></i> {{ post.date_created | datetime }}</div>
-						<div class="span2"><i class="icon-bookmark"></i> <a href="#">{{ post.category.title }}</a></div>
+						<div class="span2"><i class="icon-bookmark"></i> <a href="{{ url('blog-index-category', category = post.category.slug) }}">{{ post.category.title }}</a></div>
 						<div class="span2"><i class="icon-comment"></i> 0 comments</div>
 					</div>
 
