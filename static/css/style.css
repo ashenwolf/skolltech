@@ -147,7 +147,7 @@ h4 {
 	position: relative;
 }
 
-.sliderContainer {
+.sliderFront {
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -162,6 +162,10 @@ h4 {
 	overflow: hidden;
 	
 	width: 100%;
+	height: 100%;
+}
+
+.sliderFront .iosSlider {
 	height: 400px;
 }
 
@@ -169,8 +173,11 @@ h4 {
 .iosSlider .slider {
 	/* required */
 	width: 100%;
-	height: 100%;
 	z-index: 0;
+}
+
+.sliderFront .iosSlider .slider {
+	height: 100%;
 }
 
 /* slide */
@@ -179,8 +186,11 @@ h4 {
 	float: left;
 
 	width: 100%;
-	height: 100%;
 	position: relative;
+}
+
+.sliderFront .iosSlider .slider .item {
+	height: 100%;
 }
 
 .iosSlider .slider .item .selectorShadow {
