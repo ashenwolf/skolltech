@@ -23,22 +23,25 @@
 				</div>
 				<div class="span6">
 					<h2><a href="{{ url('blog-post', post_id = post.key().id()) }}">{{ post.title }}</a></h2>
+					<span>by <a href="#">Sergii Gulenok</a></span>
+					<hr style="color: #666; background-color: #666; height: 1px;" />
 					<div class="row" style="font-size: small; margin-top: -5px; color: #333;">
-						<div class="span4">{{ post.date_created | datetime }} by Author</div>
+						<div class="span2"><i class="icon-time"></i> {{ post.date_created | datetime }}</div>
+						<div class="span2"><i class="icon-bookmark"></i> <a href="#">{{ post.category.title }}</a></div>
 						<div class="span2"><i class="icon-comment"></i> 0 comments</div>
 					</div>
 
-					<div style="margin-top: 24px;">
+					<div style="margin-top: 32px;">
 						{% if post.teaser %}{{ post.teaser }}
 						{% else %}{{ post.content | truncate(512) | htmlify }}{% endif %}
 					</div>
 
-					<div style="font-size: small;">
 					<hr style="color: #666; background-color: #666; height: 1px;" />
+<!--					<div style="font-size: small;">
 					Tags: <a href="#">gae</a>, <a href="#">python</a><br />
 					Category: <a href="#">Knowledge sharing</a>
-					<hr style="color: #666; background-color: #666; height: 1px;" />
 					</div>
+					<hr style="color: #666; background-color: #666; height: 1px;" />-->
 				</div>
 			</div>
 			{% endfor %}
