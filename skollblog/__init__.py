@@ -5,8 +5,9 @@ import views
 import views_admin
 
 routes = [
-    Route('/', 							views.index,			'blog-index'),
-    Route('/<post_id:\d+>/', 			views.post, 			'blog-post'),
+    Route('/', 								views.index,			'blog-index'),
+    Route('/topic/<category:[a-z\-\.]+>/',  views.index,        	'blog-index-category'),
+    Route('/<post_id:\d+>/', 				views.post, 			'blog-post'),
 ]
 
 adminRoutes = [

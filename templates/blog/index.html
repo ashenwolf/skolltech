@@ -6,7 +6,29 @@
 	<div class="row">
 		<div class="span12">
 			{% if is_admin %}<a href="{{ url('admin-blog-post-add') }}" class="btn btn-large" style="float: right;"><i class="icon-plus"></i> New post</a>{% endif %}
-<!--			<h1>{% trans %}Blog{% endtrans %}</h1><br /><br />-->
+			{% if is_admin %}<h1>&nbsp;</h1>{% endif %}
+			<div class="navbar">
+			  <div class="navbar-inner">
+			  	<div class="container">
+				    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				    </a>
+
+				    <a class="brand" href="#">Topics:</a>
+
+				    <div class="nav-collapse">
+					    <ul class="nav">
+					  	<li {% if not cur_category %}class="active"{% endif %}><a href="{{ url('blog-index') }}">All</a></li>
+					    {% for category in categories %}
+						  <li {% if cur_category and category.key() == cur_category.key() %}class="active"{% endif %}><a href="{{ url('blog-index-category', category = category.slug) }}">{{ category.title }}</a></li>
+						{% endfor %}
+					    </ul>
+					</div>
+			    </div>
+			  </div>
+			</div>
 		</div>
 	</div>
 
