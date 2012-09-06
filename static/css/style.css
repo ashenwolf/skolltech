@@ -92,6 +92,8 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
         font-stretch: condensed;
+	color: #333;
+	text-shadow: #fff 1px 1px;
 }
 
 h1 {
@@ -368,15 +370,12 @@ h4 {
 	background: #fff;
 }
 
-h1, h2, h3, h4, h5 {
-	text-shadow: #fff 1px 1px;
-}
-
 #page-footer, #page-footer p {
 	color: #aaa;
 	font-size: small;
 }
 
 #page-footer h1, #page-footer h2, #page-footer h3, #page-footer h4, #page-footer h5 {
+	color: #aaa;
 	text-shadow: #222 1px 1px;
 }
