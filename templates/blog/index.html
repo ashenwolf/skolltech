@@ -22,7 +22,7 @@
 					    <ul class="nav">
 					  	<li {% if not cur_category %}class="active"{% endif %}><a href="{{ url('blog-index') }}">All</a></li>
 					    {% for category in categories %}
-						  <li {% if cur_category and category.key() == cur_category.key() %}class="active"{% endif %}><a href="{{ url('blog-index-category', category = category.slug) }}">{{ category.title }}</a></li>
+						  	<li {% if cur_category and category.key() == cur_category.key() %}class="active"{% endif %}><a href="{{ url('blog-index-category', category = category.slug) }}">{{ category.title }}</a></li>
 						{% endfor %}
 					    </ul>
 					</div>

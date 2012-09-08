@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'Open Sans';
+    font-family: 'Open Sans Condensed';
     src: url('fonts/OpenSans-CondLight-webfont.eot');
     src: url('fonts/OpenSans-CondLight-webfont.eot?#iefix') format('embedded-opentype'),
          url('fonts/OpenSans-CondLight-webfont.woff') format('woff'),
@@ -7,11 +7,10 @@
          url('fonts/OpenSans-CondLight-webfont.svg#OpenSansCondensedLight') format('svg');
     font-weight: normal;
     font-style: normal;
-    font-stretch: condensed;
 }
 
 @font-face {
-    font-family: 'Open Sans';
+    font-family: 'Open Sans Condensed';
     src: url('fonts/OpenSans-CondLightItalic-webfont.eot');
     src: url('fonts/OpenSans-CondLightItalic-webfont.eot?#iefix') format('embedded-opentype'),
          url('fonts/OpenSans-CondLightItalic-webfont.woff') format('woff'),
@@ -19,7 +18,17 @@
          url('fonts/OpenSans-CondLightItalic-webfont.svg#OpenSansCondensedLightItalic') format('svg');
     font-weight: normal;
     font-style: italic;
-    font-stretch: condensed;
+}
+
+@font-face {
+    font-family: 'Open Sans Condensed';
+    src: url('fonts/OpenSans-CondBold-webfont.eot');
+    src: url('fonts/OpenSans-CondBold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/OpenSans-CondBold-webfont.woff') format('woff'),
+         url('fonts/OpenSans-CondBold-webfont.ttf') format('truetype'),
+         url('fonts/OpenSans-CondBold-webfont.svg#OpenSansCondensedBold') format('svg');
+    font-weight: 700;
+    font-style: normal;
 }
 
 @font-face {
@@ -31,7 +40,6 @@
          url('fonts/OpenSans-Italic-webfont.svg#OpenSansItalic') format('svg');
     font-weight: normal;
     font-style: italic;
-    font-stretch: normal;
 }
 
 @font-face {
@@ -41,9 +49,8 @@
          url('fonts/OpenSans-BoldItalic-webfont.woff') format('woff'),
          url('fonts/OpenSans-BoldItalic-webfont.ttf') format('truetype'),
          url('fonts/OpenSans-BoldItalic-webfont.svg#OpenSansBoldItalic') format('svg');
-    font-weight: bold;
+    font-weight: 700;
     font-style: italic;
-    font-stretch: normal;
 }
 
 @font-face {
@@ -53,21 +60,8 @@
          url('fonts/OpenSans-Bold-webfont.woff') format('woff'),
          url('fonts/OpenSans-Bold-webfont.ttf') format('truetype'),
          url('fonts/OpenSans-Bold-webfont.svg#OpenSansBold') format('svg');
-    font-weight: bold;
+    font-weight: 700;
     font-style: normal;
-    font-stretch: normal;
-}
-
-@font-face {
-    font-family: 'Open Sans';
-    src: url('fonts/OpenSans-CondBold-webfont.eot');
-    src: url('fonts/OpenSans-CondBold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/OpenSans-CondBold-webfont.woff') format('woff'),
-         url('fonts/OpenSans-CondBold-webfont.ttf') format('truetype'),
-         url('fonts/OpenSans-CondBold-webfont.svg#OpenSansCondensedBold') format('svg');
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: condensed;
 }
 
 @font-face {
@@ -79,7 +73,6 @@
          url('fonts/OpenSans-Regular-webfont.svg#OpenSansRegular') format('svg');
     font-weight: normal;
     font-style: normal;
-    font-stretch: normal;
 }
 
 
@@ -91,7 +84,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-        font-stretch: condensed;
+	font-family: "Open Sans Condensed", Helvetica, sans;
 	color: #333;
 	text-shadow: #fff 1px 1px;
 }
