@@ -219,13 +219,20 @@
 {% endblock %}
 
 {% block javascript %}
-{% if project %}
 <script src="/static/js/vendor/jquery.ui.widget.js" type="text/javascript"></script>
 <script src="/static/js/jquery.iframe-transport.js" type="text/javascript"></script>
 <script src="/static/js/jquery.fileupload.js" type="text/javascript"></script>
 
+<!-- markItUp! -->
+<script type="text/javascript" src="/static/markitup/jquery.markitup.js"></script>
+<!-- markItUp! toolbar settings -->
+<script type="text/javascript" src="/static/markitup/sets/skoll/set.js"></script>
+
 <script type="text/javascript">
 jQuery(document).ready(function () {
+    $(".markitup").markItUp(mySettings);
+
+    {% if project %}
     $('#fileupload').fileupload({
         dataType: 'json',
         formData: {
@@ -233,9 +240,9 @@ jQuery(document).ready(function () {
         },
         done: function (e, data) {
             $('<li class="span2" id="image-'+ data.result.image_id +'"></li>').append(
-            	$('<a class="thumbnail" onClick="setTeaser('+ data.result.image_id +')"></a>').append(
             		$('<a class="close" onClick="removeImage('+ data.result.image_id +');" style="margin-right: 2px;">&times;</a>')
             		).append(
+	            	$('<a class="thumbnail" onClick="setTeaser('+ data.result.image_id +')"></a>').append(
             		$('<img alt="" />').attr("src", data.result.image_url)
             		)
             	).appendTo(jQuery("#image_list"));
@@ -249,6 +256,7 @@ jQuery(document).ready(function () {
 	        return false;
 	    } 
     });
+    {% endif %}
 });
 
 function setTeaser(id) {
@@ -300,16 +308,5 @@ function insertImage(id, url) {
 	];
 	$.markItUp({ replaceWith: image.join('') });
 }
-</script>
-{% endif %}
-<!-- markItUp! -->
-<script type="text/javascript" src="/static/markitup/jquery.markitup.js"></script>
-<!-- markItUp! toolbar settings -->
-<script type="text/javascript" src="/static/markitup/sets/skoll/set.js"></script>
-
-<script type="text/javascript" >
-   $(document).ready(function() {
-      $(".markitup").markItUp(mySettings);
-   });
 </script>
 {% endblock %}
