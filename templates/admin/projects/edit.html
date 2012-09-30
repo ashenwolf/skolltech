@@ -259,6 +259,7 @@ jQuery(document).ready(function () {
     {% endif %}
 });
 
+{% if project %}
 function setTeaser(id) {
 	jQuery.ajax({
 		url: "{{ url('admin-projects-set-teaser') }}",
@@ -274,7 +275,7 @@ function setTeaser(id) {
 		}
 	});
 }
-
+{% endif %}
 
 function removeImage(id) {
 	jQuery.ajax({
